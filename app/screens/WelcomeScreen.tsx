@@ -10,8 +10,12 @@ export default function WelcomeScreen() {
         <Text style={styles.text}>Welcome to ReVendre!</Text>
       </SafeAreaView>
       <View style={styles.container}>
-        <Button title="Log in" color={"black"} />
-        <Button title="I'm a new user" color={"black"} />
+        <View style={styles.button}>
+          <Button title="Log in" color={"white"} />
+        </View>
+        <View style={styles.button}>
+          <Button title="I'm a new user" color={"white"} />
+        </View>
       </View>
     </ImageBackground>
   );
@@ -22,7 +26,7 @@ const styles = StyleSheet.create({
     flex: 0.6,
     alignItems: "center",
     justifyContent: "center",
-    gap: "50px",
+    gap: 5,
   },
   background: {
     flex: 1,
@@ -31,5 +35,13 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: "10%",
     fontSize: 30,
+    fontWeight: 500,
+  },
+  button: {
+    backgroundColor: "#3a4750",
+    borderRadius: "10%",
+    padding: 1,
+    width: 160,
+    opacity: 0.8,
   },
 });
