@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
+import ViewImageScreen from "./app/screens/ViewImageScreen";
 
 export default function App() {
   // return (
@@ -9,7 +10,8 @@ export default function App() {
   //     <StatusBar style="auto" />
   //   </View>
   // );
-  return <WelcomeScreen />;
+  // return <WelcomeScreen />;
+  return <ViewImageScreen />;
 }
 
 const styles = StyleSheet.create({
