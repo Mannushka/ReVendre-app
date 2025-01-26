@@ -6,51 +6,43 @@ export default function WelcomeScreen() {
     uri: "https://images.unsplash.com/photo-1504198458649-3128b932f49e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   };
   return (
-    <ImageBackground source={image} style={styles.background}>
+    <ImageBackground source={image} style={styles.background} blurRadius={2}>
       <SafeAreaView>
         <Text style={styles.text}>Welcome to ReVendre!</Text>
       </SafeAreaView>
       <View style={styles.container}>
-        <View style={styles.button}>
-          <ButtonComponent
-            title="Log in"
-            color={"white"}
-            onClick={() => console.log("log in btn clicked")}
-          />
-        </View>
-        <View style={styles.button}>
-          <ButtonComponent
-            title="I'm a new user"
-            color={"white"}
-            onClick={() => console.log("new user btn clicked")}
-          />
-        </View>
+        <ButtonComponent
+          title="Log in"
+          color={"white"}
+          backgroundColor={"#36454F"}
+          onClick={() => console.log("log in btn clicked")}
+        />
+        <ButtonComponent
+          title="I'm a new user"
+          color={"white"}
+          backgroundColor={"#36454F"}
+          onClick={() => console.log("new user btn clicked")}
+        />
       </View>
     </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+  },
   container: {
     flex: 0.6,
     alignItems: "center",
     justifyContent: "center",
     gap: 5,
   },
-  background: {
-    flex: 1,
-  },
+
   text: {
     alignSelf: "center",
     marginTop: "10%",
     fontSize: 30,
     fontWeight: 500,
-  },
-  button: {
-    backgroundColor: "#3a4750",
-    borderRadius: "10%",
-    padding: 1,
-    width: 160,
-    opacity: 0.8,
   },
 });
