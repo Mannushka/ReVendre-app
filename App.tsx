@@ -10,8 +10,8 @@ export default function App() {
   //     <StatusBar style="auto" />
   //   </View>
   // );
-  // return <WelcomeScreen />;
-  return <ViewImageScreen />;
+  return <WelcomeScreen />;
+  // return <ViewImageScreen />;
 }
 
 const styles = StyleSheet.create({

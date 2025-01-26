@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, ImageBackground, Button } from "react-native";
 import { SafeAreaView } from "react-native";
+import { ButtonComponent } from "../components/ButtonComponent";
 export default function WelcomeScreen() {
   const image = {
     uri: "https://images.unsplash.com/photo-1504198458649-3128b932f49e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -11,10 +12,18 @@ export default function WelcomeScreen() {
       </SafeAreaView>
       <View style={styles.container}>
         <View style={styles.button}>
-          <Button title="Log in" color={"white"} />
+          <ButtonComponent
+            title="Log in"
+            color={"white"}
+            onClick={() => console.log("log in btn clicked")}
+          />
         </View>
         <View style={styles.button}>
-          <Button title="I'm a new user" color={"white"} />
+          <ButtonComponent
+            title="I'm a new user"
+            color={"white"}
+            onClick={() => console.log("new user btn clicked")}
+          />
         </View>
       </View>
     </ImageBackground>
