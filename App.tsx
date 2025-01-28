@@ -12,7 +12,7 @@ export default function App() {
   //   </View>
   // );
   // return <WelcomeScreen />;
-  return <ListingDetailsScreen />;
+  return <ViewImageScreen />;
 }
 
 const styles = StyleSheet.create({
