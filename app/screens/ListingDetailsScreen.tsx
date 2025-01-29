@@ -1,6 +1,8 @@
 import React from "react";
 import { View, SafeAreaView, StyleSheet } from "react-native";
 import { ListingCard } from "../components/ListingCard";
+import Colors from "../utils/Colors";
+
 export const ListingDetailsScreen = () => {
   const listing = {
     title: "Blue Pillow",
@@ -24,6 +26,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "center",
-    backgroundColor: "gray",
+    backgroundColor: Colors.GRAY_LIGHT300,
   },
 });

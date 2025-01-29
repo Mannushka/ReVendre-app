@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Colors from "../utils/Colors";
 
 export default function ViewImageScreen() {
   const image = {
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "black",
+    backgroundColor: Colors.BLACK,
   },
   icon: {
     width: 50,
