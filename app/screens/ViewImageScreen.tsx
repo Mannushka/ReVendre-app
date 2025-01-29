@@ -1,11 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  ImageBackground,
-  Image,
-  Button,
-} from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function ViewImageScreen() {
@@ -22,7 +15,7 @@ export default function ViewImageScreen() {
         <View style={styles.icon}>
           <MaterialCommunityIcons
             name="trash-can-outline"
-            size={24}
+            size={25}
             color="white"
           />
         </View>
@@ -41,16 +34,15 @@ const styles = StyleSheet.create({
   icon: {
     width: 50,
     height: 50,
-    // backgroundColor: "#f9c4ac",
-    // position: "absolute",
-    // top: 100,
-    // alignSelf: "flex-start",
+    position: "relative",
+    left: 10,
   },
   iconContainer: {
+    width: "100%",
     flexDirection: "row",
-    // justifyContent: "space-between",
-    gap: "60%",
+    justifyContent: "space-between",
     margin: 5,
+    paddingHorizontal: 20,
   },
 
   image: { width: "100%", height: "60%" },
