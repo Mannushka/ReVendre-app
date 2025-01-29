@@ -5,13 +5,6 @@ import ViewImageScreen from "./app/screens/ViewImageScreen";
 import { ListingDetailsScreen } from "./app/screens/ListingDetailsScreen";
 
 export default function App() {
-  // return (
-  //   <View style={styles.container}>
-  //     <Text>Hello world!!!</Text>
-  //     <StatusBar style="auto" />
-  //   </View>
-  // );
-  // return <WelcomeScreen />;
   return <ViewImageScreen />;
 }
 
