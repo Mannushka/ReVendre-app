@@ -1,4 +1,5 @@
-import React from "react";
+import Colors from "../utils/Colors";
+
 import { View, StyleSheet, Image, Text } from "react-native";
 interface ListingCardProps {
   title: string;
@@ -14,7 +15,7 @@ export const ListingCard: React.FC<ListingCardProps> = (props) => {
     <View style={styles.card}>
       <Image source={imageSource} style={styles.image} />
       <View style={styles.textContainer}>
-        <View style={styles.textContainer}>
+        <View>
           <Text style={styles.title}>{props.title}</Text>
         </View>
         <View>
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
   card: {
     width: 350,
     height: 300,
-    backgroundColor: "white",
+    backgroundColor: Colors.WHITE,
     justifyContent: "flex-start",
     alignItems: "center",
     marginTop: 80,
@@ -43,9 +44,9 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flexDirection: "row",
+    width: "85%",
     alignItems: "baseline",
-    justifyContent: "space-between", // doesn't work
-    gap: 150,
+    justifyContent: "space-between",
   },
   title: {
     marginTop: 10,
@@ -53,16 +54,11 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "500",
   },
-  titleContainer: {}, //need to either fill out or delete
+
   subTitle: {
     marginTop: 10,
     textAlign: "center",
     fontSize: 15,
     fontWeight: "300",
   },
-  subTitleContainer: {
-    flex: 0.2,
-    alignItems: "flex-end",
-    justifyContent: "center",
-  }, // doesn't work
 });
