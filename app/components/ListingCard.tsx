@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.WHITE,
     justifyContent: "flex-start",
     alignItems: "center",
-    marginTop: 80,
+    // marginTop: 50,
     borderRadius: 10,
   },
   image: {
