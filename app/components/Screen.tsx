@@ -5,10 +5,11 @@ interface ScreenProps {
 }
 
 export const Screen: React.FC<ScreenProps> = ({ children }) => {
-  return <SafeAreaView>{children}</SafeAreaView>;
+  return <SafeAreaView style={styles.screen}>{children}</SafeAreaView>;
 };
 const styles = StyleSheet.create({
   screen: {
     paddingTop: Constants.statusBarHeight,
+    flex: 1,
   },
 });
