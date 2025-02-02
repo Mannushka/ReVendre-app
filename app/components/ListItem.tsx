@@ -5,12 +5,15 @@ import {
   Text,
   TouchableHighlight,
 } from "react-native";
+import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
+import ReanimatedSwipeable from "react-native-gesture-handler/ReanimatedSwipeable";
 import Colors from "../utils/Colors";
 interface ListItemsProps {
   title: string;
   subTitle: string;
   image: string;
   onPress?: () => void;
+  renderRightActions?: () => JSX.Element;
 }
 
 export const ListItem: React.FC<ListItemsProps> = ({
@@ -18,24 +21,31 @@ export const ListItem: React.FC<ListItemsProps> = ({
   subTitle,
   image,
   onPress,
+  renderRightActions,
 }) => {
   const imageSource = { uri: image };
   return (
-    <TouchableHighlight underlayColor={Colors.GRAY_LIGHT300} onPress={onPress}>
-      <View style={styles.container}>
-        <Image style={styles.image} source={imageSource} />
-        <View style={styles.textContainer}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.subTitle}>{subTitle}</Text>
+    <ReanimatedSwipeable renderRightActions={renderRightActions}>
+      <TouchableHighlight
+        underlayColor={Colors.GRAY_LIGHT300}
+        onPress={onPress}
+      >
+        <View style={styles.container}>
+          <Image style={styles.image} source={imageSource} />
+          <View style={styles.textContainer}>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.subTitle}>{subTitle}</Text>
+          </View>
         </View>
-      </View>
-    </TouchableHighlight>
+      </TouchableHighlight>
+    </ReanimatedSwipeable>
   );
 };
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     padding: 20,
+    width: "100%",
   },
   image: {
     width: 70,
