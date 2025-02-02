@@ -1,24 +1,35 @@
-import { View, StyleSheet, Image, Text } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Image,
+  Text,
+  TouchableHighlight,
+} from "react-native";
+import Colors from "../utils/Colors";
 interface ListItemsProps {
   title: string;
   subTitle: string;
   image: string;
+  onPress?: () => void;
 }
 
 export const ListItem: React.FC<ListItemsProps> = ({
   title,
   subTitle,
   image,
+  onPress,
 }) => {
   const imageSource = { uri: image };
   return (
-    <View style={styles.container}>
-      <Image style={styles.image} source={imageSource} />
-      <View style={styles.textContainer}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.subTitle}>{subTitle}</Text>
+    <TouchableHighlight underlayColor={Colors.GRAY_LIGHT300} onPress={onPress}>
+      <View style={styles.container}>
+        <Image style={styles.image} source={imageSource} />
+        <View style={styles.textContainer}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.subTitle}>{subTitle}</Text>
+        </View>
       </View>
-    </View>
+    </TouchableHighlight>
   );
 };
 const styles = StyleSheet.create({
