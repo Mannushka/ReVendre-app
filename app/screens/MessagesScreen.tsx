@@ -2,12 +2,14 @@ import { FlatList, StyleSheet } from "react-native";
 import { ListItem } from "../components/ListItem";
 import { Screen } from "../components/Screen";
 import { ListItemSeparator } from "../components/ListItemSeparator";
+import { ListItemDeleteAction } from "../components/ListItemDeleteAction";
+import { useState } from "react";
 // interface MessagesScreenProps {
 //   title: string;
 // }
 
 export const MessagesScreen = () => {
-  const messages = [
+  const initialMessages = [
     {
       id: 1,
       title: "Title 1",
@@ -44,6 +46,17 @@ export const MessagesScreen = () => {
         "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
   ];
+  const [messages, setMessages] = useState(initialMessages);
+  const handleDelete = (message: {
+    id: number;
+    title: string;
+    description: string;
+    image: string;
+  }): void => {
+    setMessages((prevMessages) =>
+      prevMessages.filter((m) => m.id !== message.id)
+    );
+  };
 
   return (
     <Screen>
@@ -56,6 +69,9 @@ export const MessagesScreen = () => {
             subTitle={item.description}
             image={item.image}
             onPress={() => console.log("Message selected", { item })}
+            renderRightActions={() => (
+              <ListItemDeleteAction onPress={() => handleDelete(item)} />
+            )}
           />
         )}
         ItemSeparatorComponent={ListItemSeparator}
