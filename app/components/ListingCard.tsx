@@ -12,14 +12,16 @@ export const ListingCard: React.FC<ListingCardProps> = (props) => {
     uri: props.image,
   };
   return (
-    <View style={styles.card}>
-      <Image source={imageSource} style={styles.image} />
-      <View style={styles.textContainer}>
-        <View>
-          <Text style={styles.title}>{props.title}</Text>
-        </View>
-        <View>
-          <Text style={styles.subTitle}>{props.subTitle}</Text>
+    <View style={styles.container}>
+      <View style={styles.card}>
+        <Image source={imageSource} style={styles.image} />
+        <View style={styles.textContainer}>
+          <View>
+            <Text style={styles.title}>{props.title}</Text>
+          </View>
+          <View>
+            <Text style={styles.subTitle}>{props.subTitle}</Text>
+          </View>
         </View>
       </View>
     </View>
@@ -32,8 +34,13 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.WHITE,
     justifyContent: "flex-start",
     alignItems: "center",
-    // marginTop: 50,
+    marginTop: 40,
     borderRadius: 10,
+    borderWidth: 1,
+    borderColor: Colors.GRAY_LIGHT300,
+  },
+  container: {
+    alignItems: "center",
   },
   image: {
     width: 300,
