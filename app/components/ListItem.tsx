@@ -5,7 +5,8 @@ import {
   Text,
   TouchableHighlight,
 } from "react-native";
-import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
+// import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
+import Swipeable from "expo";
 import ReanimatedSwipeable from "react-native-gesture-handler/ReanimatedSwipeable";
 import Colors from "../utils/Colors";
 interface ListItemsProps {
@@ -55,6 +56,7 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     gap: 10,
+    // backgroundColor: Colors.WHITE,
   },
   title: {
     fontWeight: 600,
