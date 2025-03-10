@@ -4,11 +4,7 @@ import { Screen } from "../components/Screen";
 import Colors from "../utils/Colors";
 import { View, StyleSheet, FlatList } from "react-native";
 type IconName =
-  | "symbol"
-  | "function"
-  | "key"
-  | "head"
-  | "link"
+  | "logout"
   | "email"
   | "image"
   | "text"
@@ -21,7 +17,8 @@ type IconName =
   | "forward"
   | "minus"
   | "plus"
-  | "exclamation";
+  | "exclamation"
+  | "format-list-bulleted";
 type menuItem = {
   // id: number;
   icon: IconName;
