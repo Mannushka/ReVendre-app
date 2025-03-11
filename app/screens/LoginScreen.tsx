@@ -3,18 +3,20 @@ import { Screen } from "../components/Screen";
 import { AppTextInput } from "../components/AppTextInput";
 import { ButtonComponent } from "../components/ButtonComponent";
 import Colors from "../utils/Colors";
-import { useState } from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
 
+const validationSchema = yup.object().shape({
+  email: yup.string().required().email(),
+  password: yup.string().required().min(8).label("Password"),
+});
 export const LoginScreen = () => {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
   return (
     <Screen>
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={(values) => console.log(values)}
+        validationSchema={validationSchema}
       >
         {({ handleChange, handleSubmit }) => (
           <View style={styles.container}>
@@ -25,7 +27,6 @@ export const LoginScreen = () => {
               keyboardType="email-address"
               placeholder="Email"
               textContentType="emailAddress"
-              // onChangeText={(text: string) => setEmail(text)}
               onChangeText={handleChange("email")}
             />
             <AppTextInput
