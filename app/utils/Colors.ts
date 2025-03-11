@@ -5,6 +5,7 @@ const Colors = {
   GRAY_LIGHT300: "#d6d3d1",
   RED_DANGER: "#E32636",
   BEIGE_LIGHT: "#faf0e6",
+  RED: "#CC0000",
 };
 
 export default Colors;
