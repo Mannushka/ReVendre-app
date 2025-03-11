@@ -53,6 +53,7 @@ interface AppTextInputProps {
     | "username";
 
   onChangeText: (text: string) => void;
+  onBlur?: () => void;
 }
 export const AppTextInput: React.FC<AppTextInputProps> = (props) => {
   return (
