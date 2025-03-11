@@ -8,7 +8,7 @@ import * as yup from "yup";
 import { ErrorMessage } from "../components/ErrorMessage";
 
 const validationSchema = yup.object().shape({
-  email: yup.string().required().email(),
+  email: yup.string().required().email().label("Email"),
   password: yup.string().required().min(8).label("Password"),
 });
 export const LoginScreen = () => {
@@ -19,28 +19,32 @@ export const LoginScreen = () => {
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
-        {({ handleChange, handleSubmit, errors }) => (
+        {({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
           <View style={styles.container}>
             <AppTextInput
               autoCapitalize="none"
               autoCorrect={false}
               icon="email"
               keyboardType="email-address"
+              onBlur={() => {
+                setFieldTouched("email"), console.log(touched.email);
+              }}
               placeholder="Email"
               textContentType="emailAddress"
               onChangeText={handleChange("email")}
             />
-            <ErrorMessage error={errors.email} />
+            {touched.email && <ErrorMessage error={errors.email} />}
             <AppTextInput
               autoCapitalize="none"
               autoCorrect={false}
               icon="lock"
               keyboardType="email-address"
+              onBlur={() => setFieldTouched("password")}
               placeholder="Password"
               textContentType="password"
               onChangeText={handleChange("password")}
             />
-            <ErrorMessage error={errors.password} />
+            {touched.password && <ErrorMessage error={errors.password} />}
             <ButtonComponent
               title="Log in"
               onClick={handleSubmit}
