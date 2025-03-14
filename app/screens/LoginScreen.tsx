@@ -6,6 +6,7 @@ import Colors from "../utils/Colors";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { ErrorMessage } from "../components/ErrorMessage";
+import { AppFormField } from "../components/AppFormField";
 
 const validationSchema = yup.object().shape({
   email: yup.string().required().email().label("Email"),
@@ -21,7 +22,25 @@ export const LoginScreen = () => {
       >
         {({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
           <View style={styles.container}>
-            <AppTextInput
+            <AppFormField
+              fieldName="email"
+              autoCapitalize="none"
+              autoCorrect={false}
+              icon="email"
+              keyboardType="email-address"
+              placeholder="Email"
+              textContentType="emailAddress"
+            ></AppFormField>
+            <AppFormField
+              fieldName="password"
+              autoCapitalize="none"
+              autoCorrect={false}
+              icon="lock"
+              keyboardType="email-address"
+              placeholder="Password"
+              textContentType="password"
+            ></AppFormField>
+            {/* <AppTextInput
               autoCapitalize="none"
               autoCorrect={false}
               icon="email"
@@ -32,9 +51,9 @@ export const LoginScreen = () => {
               placeholder="Email"
               textContentType="emailAddress"
               onChangeText={handleChange("email")}
-            />
-            {touched.email && <ErrorMessage error={errors.email} />}
-            <AppTextInput
+            /> */}
+            {/* {touched.email && <ErrorMessage error={errors.email} />} */}
+            {/* <AppTextInput
               autoCapitalize="none"
               autoCorrect={false}
               icon="lock"
@@ -43,8 +62,8 @@ export const LoginScreen = () => {
               placeholder="Password"
               textContentType="password"
               onChangeText={handleChange("password")}
-            />
-            {touched.password && <ErrorMessage error={errors.password} />}
+            /> */}
+            {/* {touched.password && <ErrorMessage error={errors.password} />} */}
             <ButtonComponent
               title="Log in"
               onClick={handleSubmit}
