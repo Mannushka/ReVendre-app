@@ -29,6 +29,7 @@ type IconName =
   | "minus"
   | "plus"
   | "exclamation";
+
 interface AppTextInputProps {
   icon?: IconName;
   placeholder?: string;
