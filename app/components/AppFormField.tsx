@@ -2,26 +2,10 @@ import { AppTextInput } from "./AppTextInput";
 import { View, StyleSheet } from "react-native";
 import { ErrorMessage } from "./ErrorMessage";
 import { useFormikContext, FormikTouched } from "formik";
-type IconName = "lock" | "email" | "image" | "text";
-type Keyboard =
-  | "default"
-  | "number-pad"
-  | "decimal-pad"
-  | "numeric"
-  | "email-address"
-  | "phone-pad"
-  | "url";
-
-type TextContent =
-  | "none"
-  | "emailAddress"
-  | "countryName"
-  | "familyName"
-  | "givenName"
-  | "password"
-  | "username";
-
-type AutoCapitalize = "none" | "words" | "characters" | "sentences";
+import { IconName } from "../types/IconName";
+import { Keyboard } from "../types/Keyboard";
+import { TextContent } from "../types/TextContent";
+import { AutoCapitalize } from "../types/AutoCapitalize";
 
 interface AppFormFieldProps {
   fieldName: string;
@@ -30,7 +14,6 @@ interface AppFormFieldProps {
   autoCapitalize?: AutoCapitalize;
   autoCorrect?: boolean;
   keyboardType?: Keyboard;
-
   textContentType?: TextContent;
 }
 export const AppFormField: React.FC<AppFormFieldProps> = ({
