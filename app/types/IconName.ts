@@ -1,0 +1,16 @@
+export type IconName =
+  | "logout"
+  | "email"
+  | "image"
+  | "text"
+  | "alert"
+  | "menu"
+  | "radio"
+  | "switch"
+  | "tab"
+  | "timer"
+  | "forward"
+  | "minus"
+  | "plus"
+  | "exclamation"
+  | "format-list-bulleted";
