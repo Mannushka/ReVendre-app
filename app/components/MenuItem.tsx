@@ -1,26 +1,8 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import Colors from "../utils/Colors";
+import { IconName } from "../types/IconName";
 
-type IconName =
-  | "symbol"
-  | "function"
-  | "key"
-  | "head"
-  | "link"
-  | "email"
-  | "image"
-  | "text"
-  | "alert"
-  | "menu"
-  | "radio"
-  | "switch"
-  | "tab"
-  | "timer"
-  | "forward"
-  | "minus"
-  | "plus"
-  | "exclamation";
 interface MenuItemProps {
   title: string;
   icon: IconName;
