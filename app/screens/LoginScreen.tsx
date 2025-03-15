@@ -5,6 +5,7 @@ import Colors from "../utils/Colors";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { AppFormField } from "../components/AppFormField";
+import { AppForm } from "../components/AppForm";
 
 const validationSchema = yup.object().shape({
   email: yup.string().required().email().label("Email"),
@@ -13,32 +14,38 @@ const validationSchema = yup.object().shape({
 export const LoginScreen = () => {
   return (
     <Screen>
-      <Formik
+      {/* <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
         {() => (
-          <View style={styles.container}>
-            <AppFormField
-              fieldName="email"
-              autoCapitalize="none"
-              autoCorrect={false}
-              icon="email"
-              keyboardType="email-address"
-              placeholder="Email"
-              textContentType="emailAddress"
-            ></AppFormField>
-            <AppFormField
-              fieldName="password"
-              autoCapitalize="none"
-              autoCorrect={false}
-              icon="lock"
-              keyboardType="default"
-              placeholder="Password"
-              textContentType="password"
-            ></AppFormField>
-            {/* <AppTextInput
+          <View style={styles.container}> */}
+      <AppForm
+        initialValues={{ email: "", password: "" }}
+        onSubmit={(values) => console.log(values)}
+        validationSchema={validationSchema}
+      >
+        <View style={styles.container}>
+          <AppFormField
+            fieldName="email"
+            autoCapitalize="none"
+            autoCorrect={false}
+            icon="email"
+            keyboardType="email-address"
+            placeholder="Email"
+            textContentType="emailAddress"
+          ></AppFormField>
+          <AppFormField
+            fieldName="password"
+            autoCapitalize="none"
+            autoCorrect={false}
+            icon="lock"
+            keyboardType="default"
+            placeholder="Password"
+            textContentType="password"
+          ></AppFormField>
+          {/* <AppTextInput
               autoCapitalize="none"
               autoCorrect={false}
               icon="email"
@@ -50,8 +57,8 @@ export const LoginScreen = () => {
               textContentType="emailAddress"
               onChangeText={handleChange("email")}
             /> */}
-            {/* {touched.email && <ErrorMessage error={errors.email} />} */}
-            {/* <AppTextInput
+          {/* {touched.email && <ErrorMessage error={errors.email} />} */}
+          {/* <AppTextInput
               autoCapitalize="none"
               autoCorrect={false}
               icon="lock"
@@ -61,11 +68,13 @@ export const LoginScreen = () => {
               textContentType="password"
               onChangeText={handleChange("password")}
             /> */}
-            {/* {touched.password && <ErrorMessage error={errors.password} />} */}
-            <SubmitButton title="Log in" color={Colors.BLACK} />
-          </View>
+          {/* {touched.password && <ErrorMessage error={errors.password} />} */}
+          <SubmitButton title="Log in" color={Colors.BLACK} />
+          {/* </View>
         )}
-      </Formik>
+      </Formik> */}
+        </View>
+      </AppForm>
     </Screen>
   );
 };
