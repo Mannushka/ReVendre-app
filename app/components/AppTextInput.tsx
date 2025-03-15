@@ -1,79 +1,47 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import {
-  View,
-  StyleSheet,
-  TextInput,
-  TextInputChangeEventData,
-  NativeSyntheticEvent,
-} from "react-native";
+import { View, StyleSheet, TextInput } from "react-native";
 import Colors from "../utils/Colors";
 import defaultStyles from "../utils/Styles";
-
-type IconName =
-  | "lock"
-  | "symbol"
-  | "function"
-  | "key"
-  | "head"
-  | "link"
-  | "email"
-  | "image"
-  | "text"
-  | "alert"
-  | "menu"
-  | "radio"
-  | "switch"
-  | "tab"
-  | "timer"
-  | "forward"
-  | "minus"
-  | "plus"
-  | "exclamation";
+import { IconName } from "../types/IconName";
+import { AutoCapitalize } from "../types/AutoCapitalize";
+import { Keyboard } from "../types/Keyboard";
+import { TextContent } from "../types/TextContent";
 
 interface AppTextInputProps {
   icon?: IconName;
   placeholder?: string;
-  autoCapitalize?: "none" | "words" | "characters" | "sentences";
+  autoCapitalize?: AutoCapitalize;
   autoCorrect?: boolean;
-  keyboardType?:
-    | "default"
-    | "number-pad"
-    | "decimal-pad"
-    | "numeric"
-    | "email-address"
-    | "phone-pad"
-    | "url";
-
-  textContentType?:
-    | "none"
-    | "emailAddress"
-    | "countryName"
-    | "familyName"
-    | "givenName"
-    | "password"
-    | "username";
-
+  keyboardType?: Keyboard;
+  textContentType?: TextContent;
   onChangeText: (text: string) => void;
   onBlur?: () => void;
 }
-export const AppTextInput: React.FC<AppTextInputProps> = (props) => {
+
+export const AppTextInput: React.FC<AppTextInputProps> = ({
+  icon,
+  placeholder,
+  autoCapitalize,
+  autoCorrect,
+  keyboardType,
+  textContentType,
+  onChangeText,
+  onBlur,
+}) => {
   return (
     <View style={styles.container}>
-      {props.icon && (
-        <MaterialCommunityIcons
-          style={styles.icon}
-          size={16}
-          name={props.icon}
-        />
+      {icon && (
+        <MaterialCommunityIcons style={styles.icon} size={16} name={icon} />
       )}
       <TextInput
         style={defaultStyles.text}
-        placeholder={props.placeholder && props.placeholder}
-        autoCapitalize={props.autoCapitalize && props.autoCapitalize}
-        autoCorrect={props.autoCorrect && props.autoCorrect}
-        keyboardType={props.keyboardType && props.keyboardType}
-        textContentType={props.textContentType && props.textContentType}
-        onChangeText={props.onChangeText}
+        placeholder={placeholder && placeholder}
+        autoCapitalize={autoCapitalize && autoCapitalize}
+        autoCorrect={autoCorrect && autoCorrect}
+        keyboardType={keyboardType && keyboardType}
+        textContentType={textContentType && textContentType}
+        onChangeText={onChangeText}
+        onBlur={onBlur}
       />
     </View>
   );
