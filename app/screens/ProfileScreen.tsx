@@ -3,24 +3,9 @@ import { MenuItem } from "../components/MenuItem";
 import { Screen } from "../components/Screen";
 import Colors from "../utils/Colors";
 import { View, StyleSheet, FlatList } from "react-native";
-type IconName =
-  | "logout"
-  | "email"
-  | "image"
-  | "text"
-  | "alert"
-  | "menu"
-  | "radio"
-  | "switch"
-  | "tab"
-  | "timer"
-  | "forward"
-  | "minus"
-  | "plus"
-  | "exclamation"
-  | "format-list-bulleted";
+import { IconName } from "../types/IconName";
+
 type menuItem = {
-  // id: number;
   icon: IconName;
   title: string;
 };
@@ -30,9 +15,6 @@ export const ProfileScreen = () => {
     { icon: "email", title: "My emails" },
   ];
 
-  // const renderItem = (item) => {
-  //   return <MenuItem title={item.title} icon={item.icon} />;
-  // };
   return (
     <Screen>
       <View style={styles.listItem}>
