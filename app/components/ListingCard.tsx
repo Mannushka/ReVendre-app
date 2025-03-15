@@ -1,15 +1,19 @@
 import Colors from "../utils/Colors";
-
 import { View, StyleSheet, Image, Text } from "react-native";
+
 interface ListingCardProps {
   title: string;
   subTitle: string;
   image: string;
 }
 
-export const ListingCard: React.FC<ListingCardProps> = (props) => {
+export const ListingCard: React.FC<ListingCardProps> = ({
+  title,
+  subTitle,
+  image,
+}) => {
   const imageSource = {
-    uri: props.image,
+    uri: image,
   };
   return (
     <View style={styles.container}>
@@ -17,10 +21,10 @@ export const ListingCard: React.FC<ListingCardProps> = (props) => {
         <Image source={imageSource} style={styles.image} />
         <View style={styles.textContainer}>
           <View>
-            <Text style={styles.title}>{props.title}</Text>
+            <Text style={styles.title}>{title}</Text>
           </View>
           <View>
-            <Text style={styles.subTitle}>{props.subTitle}</Text>
+            <Text style={styles.subTitle}>{subTitle}</Text>
           </View>
         </View>
       </View>
