@@ -4,17 +4,17 @@ interface ButtonProps {
   title: string;
   color?: string;
   backgroundColor?: string;
-  onClick: () => void;
+  onPress: () => void;
 }
 export const ButtonComponent: React.FC<ButtonProps> = ({
   title,
   color,
   backgroundColor,
-  onClick,
+  onPress,
 }) => {
   return (
     <View style={[styles.button, { backgroundColor: backgroundColor }]}>
-      <Button title={title} color={color} onPress={onClick} />
+      <Button title={title} color={color} onPress={onPress} />
     </View>
   );
 };
