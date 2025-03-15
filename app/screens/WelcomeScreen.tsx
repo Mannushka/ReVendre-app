@@ -17,13 +17,13 @@ export default function WelcomeScreen() {
           title="Log in"
           color={Colors.WHITE}
           backgroundColor={Colors.DARK_GRAY}
-          onClick={() => console.log("log in btn clicked")}
+          onPress={() => console.log("log in btn clicked")}
         />
         <ButtonComponent
           title="I'm a new user"
           color={Colors.WHITE}
           backgroundColor={Colors.DARK_GRAY}
-          onClick={() => console.log("new user btn clicked")}
+          onPress={() => console.log("new user btn clicked")}
         />
       </View>
     </ImageBackground>
