@@ -8,13 +8,14 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ProfileScreen } from "./app/screens/ProfileScreen";
 import { AppTextInput } from "./app/components/AppTextInput";
 import { LoginScreen } from "./app/screens/LoginScreen";
+import { RegisterScreen } from "./app/screens/RegisterScreen";
 
 export default function App() {
   return (
     <GestureHandlerRootView>
       {/* <ProfileScreen /> */}
       {/* <ListingDetailsScreen /> */}
-      <LoginScreen />
+      <RegisterScreen />
     </GestureHandlerRootView>
 
     // <View style={styles.container}>
