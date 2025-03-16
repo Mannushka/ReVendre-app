@@ -1,18 +1,36 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TextInput } from "react-native";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import ViewImageScreen from "./app/screens/ViewImageScreen";
 import { ListingDetailsScreen } from "./app/screens/ListingDetailsScreen";
+import { MessagesScreen } from "./app/screens/MessagesScreen";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { ProfileScreen } from "./app/screens/ProfileScreen";
+import { AppTextInput } from "./app/components/AppTextInput";
+import { LoginScreen } from "./app/screens/LoginScreen";
 
 export default function App() {
-  return <ListingDetailsScreen />;
+  return (
+    <GestureHandlerRootView>
+      {/* <ProfileScreen /> */}
+      {/* <ListingDetailsScreen /> */}
+      <LoginScreen />
+    </GestureHandlerRootView>
+
+    // <View style={styles.container}>
+    //   <AppTextInput icon="email" placeholder="email" />
+    // </View>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  textInput: {
+    backgroundColor: "gray",
+    width: "100%",
   },
 });

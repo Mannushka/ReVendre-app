@@ -59,6 +59,15 @@ export const MessagesScreen = () => {
     );
   };
 
+  // const renderRightActions = (item: {
+  //   id: number;
+  //   title: string;
+  //   description: string;
+  //   image: string;
+  // }) => {
+  //   return <ListItemDeleteAction onPress={() => handleDelete(item)} />;
+  // };
+
   return (
     <Screen>
       <FlatList
@@ -73,6 +82,7 @@ export const MessagesScreen = () => {
             renderRightActions={() => (
               <ListItemDeleteAction onPress={() => handleDelete(item)} />
             )}
+            // renderRightActions={() => renderRightActions(item)}
           />
         )}
         ItemSeparatorComponent={ListItemSeparator}
