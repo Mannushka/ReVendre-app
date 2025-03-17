@@ -9,18 +9,50 @@ import { ProfileScreen } from "./app/screens/ProfileScreen";
 import { AppTextInput } from "./app/components/AppTextInput";
 import { LoginScreen } from "./app/screens/LoginScreen";
 import { RegisterScreen } from "./app/screens/RegisterScreen";
+import { AppPicker } from "./app/components/AppPicker";
+import { Screen } from "./app/components/Screen";
+import { useState } from "react";
 
 export default function App() {
+  const items = [
+    {
+      label: "Furniture",
+      value: 1,
+    },
+    {
+      label: "Clothing",
+      value: 2,
+    },
+    {
+      label: "Electronics",
+      value: 3,
+    },
+  ];
+  const [category, setCategory] = useState();
   return (
-    <GestureHandlerRootView>
-      {/* <ProfileScreen /> */}
-      {/* <ListingDetailsScreen /> */}
-      <RegisterScreen />
-    </GestureHandlerRootView>
+    // <GestureHandlerRootView>
+    //   {/* <ProfileScreen /> */}
+    //   {/* <ListingDetailsScreen /> */}
+    //   {/* <RegisterScreen /> */}
 
-    // <View style={styles.container}>
-    //   <AppTextInput icon="email" placeholder="email" />
-    // </View>
+    // </GestureHandlerRootView>
+
+    <Screen>
+      <View style={styles.container}>
+        <AppPicker
+          selectedItem={category}
+          onSelectItem={(item) => setCategory(item)}
+          icon="apps"
+          items={items}
+          placeholder="Category"
+        />
+        <AppTextInput
+          icon="email"
+          placeholder="Email"
+          onChangeText={() => console.log("hello")}
+        />
+      </View>
+    </Screen>
   );
 }
 
