@@ -14,4 +14,5 @@ export type IconName =
   | "plus"
   | "exclamation"
   | "format-list-bulleted"
-  | "account";
+  | "account"
+  | "apps";
