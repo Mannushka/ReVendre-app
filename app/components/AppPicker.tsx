@@ -2,11 +2,11 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import {
   View,
   StyleSheet,
-  TextInput,
   TouchableWithoutFeedback,
   Modal,
   Button,
   FlatList,
+  Text,
 } from "react-native";
 import Colors from "../utils/Colors";
 import { IconName } from "../types/IconName";
@@ -41,9 +41,9 @@ export const AppPicker: React.FC<AppPickerProps> = ({
           {icon && (
             <MaterialCommunityIcons style={styles.icon} size={16} name={icon} />
           )}
-          <TextInput style={styles.text}>
+          <Text style={styles.text}>
             {selectedItem ? selectedItem.label : placeholder}
-          </TextInput>
+          </Text>
           <MaterialCommunityIcons size={16} name="chevron-down" />
         </View>
       </TouchableWithoutFeedback>
