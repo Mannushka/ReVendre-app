@@ -36,6 +36,7 @@ export const AppTextInput: React.FC<AppTextInputProps> = ({
       <TextInput
         style={defaultStyles.text}
         placeholder={placeholder && placeholder}
+        placeholderTextColor={Colors.GRAY_LIGHT300}
         autoCapitalize={autoCapitalize && autoCapitalize}
         autoCorrect={autoCorrect && autoCorrect}
         keyboardType={keyboardType && keyboardType}
