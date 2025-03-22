@@ -1,6 +1,10 @@
 import { Screen } from "../components/Screen";
-import { AppForm, AppFormField, SubmitButton } from "../components/forms";
-import { AppFormPicker } from "../components/forms/AppFormPicker";
+import {
+  AppForm,
+  AppFormField as FormField,
+  SubmitButton,
+} from "../components/forms";
+import { AppFormPicker as Picker } from "../components/forms/AppFormPicker";
 import { View, StyleSheet } from "react-native";
 import * as yup from "yup";
 import Colors from "../utils/Colors";
@@ -41,17 +45,21 @@ export const ListingEditScreen = () => {
         onSubmit={(values) => console.log(values)}
       >
         <View style={styles.container}>
-          <AppFormField fieldName="title" placeholder="Title"></AppFormField>
-          <AppFormField fieldName="price" placeholder="Price"></AppFormField>
-          <AppFormPicker
+          <FormField fieldName="title" placeholder="Title"></FormField>
+          <FormField
+            fieldName="price"
+            placeholder="Price"
+            keyboardType="numeric"
+          ></FormField>
+          <Picker
             items={categories}
             fieldName="category"
             placeholder="Category"
-          ></AppFormPicker>
-          <AppFormField
+          ></Picker>
+          <FormField
             fieldName="description"
             placeholder="Description"
-          ></AppFormField>
+          ></FormField>
           <SubmitButton title="Post" color={Colors.BLACK} />
         </View>
       </AppForm>
