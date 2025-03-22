@@ -41,9 +41,12 @@ export const AppPicker: React.FC<AppPickerProps> = ({
           {icon && (
             <MaterialCommunityIcons style={styles.icon} size={16} name={icon} />
           )}
-          <Text style={styles.text}>
-            {selectedItem ? selectedItem.label : placeholder}
-          </Text>
+
+          {selectedItem ? (
+            <Text style={styles.text}>{selectedItem.label}</Text>
+          ) : (
+            <Text style={styles.placeholder}>{placeholder}</Text>
+          )}
           <MaterialCommunityIcons size={16} name="chevron-down" />
         </View>
       </TouchableWithoutFeedback>
@@ -83,7 +86,12 @@ const styles = StyleSheet.create({
   },
   text: {
     flex: 1,
-    fontSize: 17,
-    fontWeight: "600",
+    fontSize: 18,
+    color: Colors.BLACK,
+  },
+  placeholder: {
+    flex: 1,
+    fontSize: 18,
+    color: Colors.GRAY_LIGHT300,
   },
 });
