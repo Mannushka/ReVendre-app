@@ -9,7 +9,7 @@ const Colors = {
   //categories
   FURNITURE_RED: "#fc5c65",
   CARS_ORANGE: "#fd9644",
-  CAMERAS_YELLOW: "#fed330",
+  GADGETS_YELLOW: "#fed330",
   GAMES_GREEN: "#26de81",
   CLOTHING_GREEN: "#2bcbba",
   SPORTS_BLUE: "#45aaf2",
