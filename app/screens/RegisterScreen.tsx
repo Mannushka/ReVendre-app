@@ -45,7 +45,12 @@ export const RegisterScreen = () => {
             placeholder="Password"
             textContentType="password"
           ></AppFormField>
-          <SubmitButton title="Register" color={Colors.BLACK} />
+          <SubmitButton
+            title="Register"
+            color={Colors.WHITE}
+            backgroundColor={Colors.BUTTON_CORAL}
+            width="85%"
+          />
         </View>
       </AppForm>
     </Screen>
