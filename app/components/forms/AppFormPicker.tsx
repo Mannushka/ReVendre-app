@@ -2,12 +2,12 @@ import { View, StyleSheet } from "react-native";
 import { useFormikContext } from "formik";
 import { AppPicker } from "../AppPicker";
 import { IconName } from "../../types/IconName";
-import { PickerItemType } from "../../types/PickerItemType";
+import { Category } from "../../types/CategoryType";
 
 interface AppFormPickerProps {
   icon?: IconName;
   placeholder?: string;
-  items: PickerItemType[];
+  items: Category[];
   fieldName: string;
   pickerWidth?: any;
 }

@@ -13,15 +13,15 @@ import { IconName } from "../types/IconName";
 import { useState } from "react";
 import { Screen } from "./Screen";
 import { PickerItem } from "./PickerItem";
-import { PickerItemType } from "../types/PickerItemType";
+import { Category } from "../types/CategoryType";
 
 interface AppPickerProps {
   icon?: IconName;
   placeholder?: string;
-  items: PickerItemType[];
+  items: Category[];
   pickerWidth?: any;
-  selectedItem: PickerItemType;
-  onSelectItem: (item: PickerItemType) => void;
+  selectedItem: Category;
+  onSelectItem: (item: Category) => void;
 }
 export const AppPicker: React.FC<AppPickerProps> = ({
   icon,
