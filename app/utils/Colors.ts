@@ -8,6 +8,7 @@ const Colors = {
   RED: "#CC0000",
   //buttons
   BUTTON_ORANGE: "#f2855e",
+  BUTTON_CORAL: "#ED7F6E",
   //categories
   FURNITURE_RED: "#fc5c65",
   CARS_ORANGE: "#fd9644",
