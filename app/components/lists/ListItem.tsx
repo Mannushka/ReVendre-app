@@ -36,7 +36,9 @@ export const ListItem: React.FC<ListItemsProps> = ({
         <View style={styles.container}>
           <Image style={styles.image} source={imageSource} />
           <View style={styles.textContainer}>
-            <Text style={styles.title}>{title}</Text>
+            <Text numberOfLines={1} style={styles.title}>
+              {title}
+            </Text>
             <Text numberOfLines={3} style={styles.subTitle}>
               {subTitle}
             </Text>
