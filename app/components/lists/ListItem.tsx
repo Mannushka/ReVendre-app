@@ -7,10 +7,13 @@ import {
 } from "react-native";
 import ReanimatedSwipeable from "react-native-gesture-handler/ReanimatedSwipeable";
 import Colors from "../../utils/Colors";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 interface ListItemsProps {
   title: string;
   subTitle: string;
   image: string;
+  showChevrons?: boolean;
   onPress?: () => void;
   renderRightActions?: () => JSX.Element;
 }
@@ -19,6 +22,7 @@ export const ListItem: React.FC<ListItemsProps> = ({
   title,
   subTitle,
   image,
+  showChevrons,
   onPress,
   renderRightActions,
 }) => {
@@ -35,6 +39,11 @@ export const ListItem: React.FC<ListItemsProps> = ({
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.subTitle}>{subTitle}</Text>
           </View>
+          <View style={styles.icon}>
+            {showChevrons && (
+              <MaterialCommunityIcons name="chevron-right" size={25} />
+            )}
+          </View>
         </View>
       </TouchableHighlight>
     </ReanimatedSwipeable>
@@ -45,6 +54,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: 20,
     width: "100%",
+    alignItems: "center",
   },
   image: {
     width: 70,
@@ -62,5 +72,9 @@ const styles = StyleSheet.create({
   },
   subTitle: {
     fontSize: 15,
+  },
+  icon: {
+    position: "absolute",
+    right: 20,
   },
 });

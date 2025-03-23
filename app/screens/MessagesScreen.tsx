@@ -79,6 +79,7 @@ export const MessagesScreen = () => {
             title={item.title}
             subTitle={item.description}
             image={item.image}
+            showChevrons={true}
             onPress={() => console.log("Message selected", { item })}
             renderRightActions={() => (
               <ListItemDeleteAction onPress={() => handleDelete(item)} />

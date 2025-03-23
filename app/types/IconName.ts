@@ -15,4 +15,5 @@ export type IconName =
   | "exclamation"
   | "format-list-bulleted"
   | "account"
-  | "apps";
+  | "apps"
+  | "chevron-right";
