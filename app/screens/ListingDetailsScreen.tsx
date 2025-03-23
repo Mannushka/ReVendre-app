@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import { ListingCard } from "../components/ListingCard";
-import { ListItem } from "../components/ListItem";
+import { ListItem } from "../components/lists/ListItem";
 import { Screen } from "../components/Screen";
 import Colors from "../utils/Colors";
 
