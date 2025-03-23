@@ -50,7 +50,7 @@ export const ListingEditScreen = () => {
             placeholder="Description"
           ></FormField>
           <SubmitButton
-            backgroundColor={Colors.BUTTON_ORANGE}
+            backgroundColor={Colors.BUTTON_CORAL}
             color={Colors.WHITE}
             title="Post"
           />
