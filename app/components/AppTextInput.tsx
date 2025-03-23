@@ -1,7 +1,6 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { View, StyleSheet, TextInput, DimensionValue } from "react-native";
 import Colors from "../utils/Colors";
-import defaultStyles from "../utils/Styles";
 import { IconName } from "../types/IconName";
 import { AutoCapitalize } from "../types/AutoCapitalize";
 import { Keyboard } from "../types/Keyboard";
@@ -67,6 +66,6 @@ const styles = StyleSheet.create({
 
   textInput: {
     alignItems: "center",
-    fontSize: 16,
+    fontSize: 18,
   },
 });
