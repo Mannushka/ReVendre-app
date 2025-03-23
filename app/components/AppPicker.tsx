@@ -55,7 +55,6 @@ export const AppPicker: React.FC<AppPickerProps> = ({
       </TouchableWithoutFeedback>
       <Modal visible={modalVisible} animationType="slide">
         <Screen>
-          <Button title="Close" onPress={() => setModalVisible(false)} />
           <View>
             <FlatList
               contentContainerStyle={styles.grid}
@@ -71,6 +70,11 @@ export const AppPicker: React.FC<AppPickerProps> = ({
                   }}
                 />
               )}
+            />
+            <Button
+              title="Close"
+              color={Colors.BLACK}
+              onPress={() => setModalVisible(false)}
             />
           </View>
         </Screen>
@@ -94,6 +98,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     gap: 10,
     marginTop: 10,
+    marginBottom: 30,
   },
   icon: {
     marginRight: 5,
