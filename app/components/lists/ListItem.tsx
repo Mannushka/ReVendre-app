@@ -5,10 +5,8 @@ import {
   Text,
   TouchableHighlight,
 } from "react-native";
-// import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
-import Swipeable from "expo";
 import ReanimatedSwipeable from "react-native-gesture-handler/ReanimatedSwipeable";
-import Colors from "../utils/Colors";
+import Colors from "../../utils/Colors";
 interface ListItemsProps {
   title: string;
   subTitle: string;
