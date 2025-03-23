@@ -7,6 +7,7 @@ import {
   Button,
   FlatList,
   Text,
+  DimensionValue,
 } from "react-native";
 import Colors from "../utils/Colors";
 import { IconName } from "../types/IconName";
@@ -19,7 +20,7 @@ interface AppPickerProps {
   icon?: IconName;
   placeholder?: string;
   items: Category[];
-  pickerWidth?: any;
+  pickerWidth?: DimensionValue;
   selectedItem: Category;
   onSelectItem: (item: Category) => void;
 }
@@ -32,7 +33,7 @@ export const AppPicker: React.FC<AppPickerProps> = ({
   onSelectItem,
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const width = pickerWidth ? pickerWidth : "100%";
+  const width: DimensionValue = pickerWidth ? pickerWidth : "100%";
   return (
     <>
       <TouchableWithoutFeedback
@@ -56,6 +57,7 @@ export const AppPicker: React.FC<AppPickerProps> = ({
       <Modal visible={modalVisible} animationType="slide">
         <Screen>
           <View>
+            <Text>Choose category</Text>
             <FlatList
               contentContainerStyle={styles.grid}
               data={items}

@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { DimensionValue, View } from "react-native";
 import { useFormikContext } from "formik";
 import { AppPicker } from "../AppPicker";
 import { IconName } from "../../types/IconName";
@@ -9,7 +9,7 @@ interface AppFormPickerProps {
   placeholder?: string;
   items: Category[];
   fieldName: string;
-  pickerWidth?: any;
+  pickerWidth?: DimensionValue;
 }
 
 export const AppFormPicker: React.FC<AppFormPickerProps> = ({

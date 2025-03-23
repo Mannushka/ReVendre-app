@@ -1,5 +1,5 @@
 import { AppTextInput } from "../AppTextInput";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, DimensionValue } from "react-native";
 import { ErrorMessage } from "./ErrorMessage";
 import { useFormikContext, FormikTouched } from "formik";
 import { IconName } from "../../types/IconName";
@@ -15,7 +15,7 @@ interface AppFormFieldProps {
   autoCorrect?: boolean;
   keyboardType?: Keyboard;
   textContentType?: TextContent;
-  inputFieldWidth?: any;
+  inputFieldWidth?: DimensionValue;
 }
 export const AppFormField: React.FC<AppFormFieldProps> = ({
   fieldName,

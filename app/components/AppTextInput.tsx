@@ -1,5 +1,5 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { View, StyleSheet, TextInput } from "react-native";
+import { View, StyleSheet, TextInput, DimensionValue } from "react-native";
 import Colors from "../utils/Colors";
 import defaultStyles from "../utils/Styles";
 import { IconName } from "../types/IconName";
@@ -14,7 +14,7 @@ interface AppTextInputProps {
   autoCorrect?: boolean;
   keyboardType?: Keyboard;
   textContentType?: TextContent;
-  inputFieldWidth?: any;
+  inputFieldWidth?: DimensionValue;
   onChangeText: (text: string) => void;
   onBlur?: () => void;
 }
