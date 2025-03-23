@@ -62,6 +62,7 @@ export const AppPicker: React.FC<AppPickerProps> = ({
             renderItem={({ item }) => (
               <PickerItem
                 label={item.label}
+                color={item.color}
                 onPress={() => {
                   setModalVisible(false), onSelectItem(item);
                 }}
