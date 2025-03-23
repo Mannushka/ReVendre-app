@@ -21,10 +21,14 @@ export const ListingCard: React.FC<ListingCardProps> = ({
         <Image source={imageSource} style={styles.image} />
         <View style={styles.textContainer}>
           <View>
-            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.title} numberOfLines={1}>
+              {title}
+            </Text>
           </View>
           <View>
-            <Text style={styles.subTitle}>{subTitle}</Text>
+            <Text style={styles.subTitle} numberOfLines={3}>
+              {subTitle}
+            </Text>
           </View>
         </View>
       </View>
