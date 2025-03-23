@@ -1,8 +1,6 @@
 import { View, StyleSheet } from "react-native";
-import Colors from "../utils/Colors";
-interface ScreenProps {
-  children: React.ReactNode;
-}
+import Colors from "../../utils/Colors";
+
 export const ListItemSeparator = () => {
   return <View style={styles.separator}></View>;
 };

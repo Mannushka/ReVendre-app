@@ -11,6 +11,7 @@ import { LoginScreen } from "./app/screens/LoginScreen";
 import { RegisterScreen } from "./app/screens/RegisterScreen";
 import { AppPicker } from "./app/components/AppPicker";
 import { Screen } from "./app/components/Screen";
+import { ListingEditScreen } from "./app/screens/ListingEditScreen";
 import { useState } from "react";
 
 export default function App() {
@@ -30,29 +31,13 @@ export default function App() {
   ];
   const [category, setCategory] = useState();
   return (
-    // <GestureHandlerRootView>
-    //   {/* <ProfileScreen /> */}
-    //   {/* <ListingDetailsScreen /> */}
-    //   {/* <RegisterScreen /> */}
-
-    // </GestureHandlerRootView>
-
-    <Screen>
-      <View style={styles.container}>
-        <AppPicker
-          selectedItem={category}
-          onSelectItem={(item) => setCategory(item)}
-          icon="apps"
-          items={items}
-          placeholder="Category"
-        />
-        <AppTextInput
-          icon="email"
-          placeholder="Email"
-          onChangeText={() => console.log("hello")}
-        />
-      </View>
-    </Screen>
+    <GestureHandlerRootView>
+      {/* <ProfileScreen /> */}
+      {/* <ListingDetailsScreen /> */}
+      {/* <RegisterScreen /> */}
+      {/* <ListingEditScreen /> */}
+      <MessagesScreen />
+    </GestureHandlerRootView>
   );
 }
 
