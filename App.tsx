@@ -35,8 +35,8 @@ export default function App() {
       {/* <ProfileScreen /> */}
       {/* <ListingDetailsScreen /> */}
       {/* <RegisterScreen /> */}
-      {/* <ListingEditScreen /> */}
-      <MessagesScreen />
+      <ListingEditScreen />
+      {/* <MessagesScreen /> */}
     </GestureHandlerRootView>
   );
 }

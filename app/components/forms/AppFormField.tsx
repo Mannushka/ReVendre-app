@@ -15,6 +15,7 @@ interface AppFormFieldProps {
   autoCorrect?: boolean;
   keyboardType?: Keyboard;
   textContentType?: TextContent;
+  inputFieldWidth?: any;
 }
 export const AppFormField: React.FC<AppFormFieldProps> = ({
   fieldName,
@@ -24,6 +25,7 @@ export const AppFormField: React.FC<AppFormFieldProps> = ({
   autoCorrect,
   keyboardType,
   textContentType,
+  inputFieldWidth,
 }) => {
   const { setFieldTouched, handleChange, touched, errors } = useFormikContext();
   return (
@@ -35,6 +37,7 @@ export const AppFormField: React.FC<AppFormFieldProps> = ({
         keyboardType={keyboardType}
         placeholder={placeholder}
         textContentType={textContentType}
+        inputFieldWidth={inputFieldWidth}
         onBlur={() => {
           setFieldTouched(fieldName),
             console.log(touched[fieldName as keyof FormikTouched<unknown>]);
@@ -52,7 +55,7 @@ export const AppFormField: React.FC<AppFormFieldProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    alignItems: "center",
+    width: "85%",
+    alignItems: "flex-start",
   },
 });

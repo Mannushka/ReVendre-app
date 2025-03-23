@@ -19,6 +19,7 @@ interface AppPickerProps {
   icon?: IconName;
   placeholder?: string;
   items: PickerItemType[];
+  pickerWidth?: any;
   selectedItem: PickerItemType;
   onSelectItem: (item: PickerItemType) => void;
 }
@@ -26,10 +27,12 @@ export const AppPicker: React.FC<AppPickerProps> = ({
   icon,
   items,
   placeholder,
+  pickerWidth,
   selectedItem,
   onSelectItem,
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const width = pickerWidth ? pickerWidth : "100%";
   return (
     <>
       <TouchableWithoutFeedback
@@ -37,7 +40,7 @@ export const AppPicker: React.FC<AppPickerProps> = ({
           setModalVisible(true);
         }}
       >
-        <View style={styles.container}>
+        <View style={[styles.container, { width: width }]}>
           {icon && (
             <MaterialCommunityIcons style={styles.icon} size={16} name={icon} />
           )}
@@ -76,7 +79,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.WHITE,
     borderRadius: 25,
     flexDirection: "row",
-    width: "80%",
+    // width: "85%",
     padding: 15,
     marginVertical: 10,
     alignItems: "center",
@@ -91,7 +94,7 @@ const styles = StyleSheet.create({
   },
   placeholder: {
     flex: 1,
-    fontSize: 18,
+    fontSize: 15,
     color: Colors.GRAY_LIGHT300,
   },
 });

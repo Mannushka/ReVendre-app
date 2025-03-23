@@ -14,6 +14,7 @@ interface AppTextInputProps {
   autoCorrect?: boolean;
   keyboardType?: Keyboard;
   textContentType?: TextContent;
+  inputFieldWidth?: any;
   onChangeText: (text: string) => void;
   onBlur?: () => void;
 }
@@ -25,16 +26,18 @@ export const AppTextInput: React.FC<AppTextInputProps> = ({
   autoCorrect,
   keyboardType,
   textContentType,
+  inputFieldWidth,
   onChangeText,
   onBlur,
 }) => {
+  const width = inputFieldWidth ? inputFieldWidth : "100%";
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { width: width }]}>
       {icon && (
         <MaterialCommunityIcons style={styles.icon} size={16} name={icon} />
       )}
       <TextInput
-        style={defaultStyles.text}
+        style={styles.textInput}
         placeholder={placeholder && placeholder}
         placeholderTextColor={Colors.GRAY_LIGHT300}
         autoCapitalize={autoCapitalize && autoCapitalize}
@@ -60,5 +63,9 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 5,
+  },
+
+  textInput: {
+    alignItems: "center",
   },
 });

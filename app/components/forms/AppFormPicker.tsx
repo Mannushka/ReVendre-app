@@ -9,6 +9,7 @@ interface AppFormPickerProps {
   placeholder?: string;
   items: PickerItemType[];
   fieldName: string;
+  pickerWidth?: any;
 }
 
 export const AppFormPicker: React.FC<AppFormPickerProps> = ({
@@ -16,6 +17,7 @@ export const AppFormPicker: React.FC<AppFormPickerProps> = ({
   items,
   placeholder,
   fieldName,
+  pickerWidth,
 }) => {
   const { setFieldValue, touched, errors, values } = useFormikContext<any>();
 
@@ -25,6 +27,7 @@ export const AppFormPicker: React.FC<AppFormPickerProps> = ({
         icon={icon}
         items={items}
         placeholder={placeholder}
+        pickerWidth={pickerWidth}
         onSelectItem={(item) => {
           setFieldValue(fieldName, item);
         }}

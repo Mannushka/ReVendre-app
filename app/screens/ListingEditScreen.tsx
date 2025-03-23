@@ -50,8 +50,10 @@ export const ListingEditScreen = () => {
             fieldName="price"
             placeholder="Price"
             keyboardType="numeric"
+            inputFieldWidth="40%"
           ></FormField>
           <Picker
+            pickerWidth="60%"
             items={categories}
             fieldName="category"
             placeholder="Category"
@@ -69,6 +71,7 @@ export const ListingEditScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
+    alignItems: "flex-start",
+    paddingHorizontal: 20,
   },
 });
