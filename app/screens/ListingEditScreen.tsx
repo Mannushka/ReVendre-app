@@ -8,6 +8,7 @@ import { AppFormPicker as Picker } from "../components/forms/AppFormPicker";
 import { View, StyleSheet } from "react-native";
 import * as yup from "yup";
 import Colors from "../utils/Colors";
+import categories from "../data/Categories";
 
 export const ListingEditScreen = () => {
   const initialValues = {
@@ -23,20 +24,6 @@ export const ListingEditScreen = () => {
     description: yup.string().label("Description"),
   });
 
-  const categories = [
-    {
-      label: "Furniture",
-      value: 1,
-    },
-    {
-      label: "Clothing",
-      value: 2,
-    },
-    {
-      label: "Electronics",
-      value: 3,
-    },
-  ];
   return (
     <Screen>
       <AppForm
