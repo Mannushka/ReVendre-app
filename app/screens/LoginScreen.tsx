@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Screen } from "../components/Screen";
 import Colors from "../utils/Colors";
 import * as yup from "yup";
@@ -65,7 +65,12 @@ export const LoginScreen = () => {
               onChangeText={handleChange("password")}
             /> */}
           {/* {touched.password && <ErrorMessage error={errors.password} />} */}
-          <SubmitButton title="Log in" color={Colors.BLACK} />
+          <SubmitButton
+            title="Log in"
+            color={Colors.WHITE}
+            backgroundColor={Colors.BUTTON_CORAL}
+            width="85%"
+          />
           {/* </View>
         )}
       </Formik> */}
