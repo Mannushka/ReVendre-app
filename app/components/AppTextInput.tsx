@@ -67,5 +67,6 @@ const styles = StyleSheet.create({
 
   textInput: {
     alignItems: "center",
+    fontSize: 16,
   },
 });

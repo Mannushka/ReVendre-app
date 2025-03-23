@@ -105,12 +105,12 @@ const styles = StyleSheet.create({
   },
   text: {
     flex: 1,
-    fontSize: 18,
+    fontSize: 16,
     color: Colors.BLACK,
   },
   placeholder: {
     flex: 1,
-    fontSize: 15,
+    fontSize: 16,
     color: Colors.GRAY_LIGHT300,
   },
 });
