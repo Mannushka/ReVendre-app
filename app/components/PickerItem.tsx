@@ -1,29 +1,44 @@
 import { TouchableOpacity, Text, StyleSheet, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { IconName } from "../types/IconName";
+import Colors from "../utils/Colors";
 
 interface PickerItemProps {
   label: string;
   color: string;
+  iconName: IconName;
   onPress: () => void;
 }
 
 export const PickerItem: React.FC<PickerItemProps> = ({
   label,
   color,
+  iconName,
   onPress,
 }) => {
   return (
-    <TouchableOpacity onPress={onPress}>
-      <View style={[styles.container, { backgroundColor: color }]}>
-        <MaterialCommunityIcons name="alert" size={16} style={styles.icon} />
-        <Text style={styles.text}>{label} </Text>
+    <TouchableOpacity onPress={onPress} style={styles.container}>
+      <View style={[styles.iconContainer, { backgroundColor: color }]}>
+        <MaterialCommunityIcons
+          name={iconName}
+          size={35}
+          color={Colors.WHITE}
+        />
       </View>
+      <Text style={styles.text}>{label} </Text>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    alignItems: "center",
+    width: 100,
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginBottom: 5,
+  },
+  iconContainer: {
     width: 80,
     height: 80,
     alignItems: "center",
@@ -32,11 +47,10 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: "50%",
   },
-  icon: {
-    // alignSelf: "center",
-  },
+
   text: {
-    padding: 5,
-    // alignSelf: "center",
+    fontWeight: "600",
+    fontFamily: "Gill Sans",
+    fontSize: 16,
   },
 });

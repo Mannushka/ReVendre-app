@@ -1,8 +1,8 @@
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import { useFormikContext } from "formik";
 import { AppPicker } from "../AppPicker";
 import { IconName } from "../../types/IconName";
-import { Category } from "../../types/CategoryType";
+import { Category } from "../../types/Category";
 
 interface AppFormPickerProps {
   icon?: IconName;

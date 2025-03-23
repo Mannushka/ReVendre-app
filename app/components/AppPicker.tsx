@@ -13,7 +13,7 @@ import { IconName } from "../types/IconName";
 import { useState } from "react";
 import { Screen } from "./Screen";
 import { PickerItem } from "./PickerItem";
-import { Category } from "../types/CategoryType";
+import { Category } from "../types/Category";
 
 interface AppPickerProps {
   icon?: IconName;
@@ -56,19 +56,23 @@ export const AppPicker: React.FC<AppPickerProps> = ({
       <Modal visible={modalVisible} animationType="slide">
         <Screen>
           <Button title="Close" onPress={() => setModalVisible(false)} />
-          <FlatList
-            data={items}
-            keyExtractor={(item) => item.value.toString()}
-            renderItem={({ item }) => (
-              <PickerItem
-                label={item.label}
-                color={item.color}
-                onPress={() => {
-                  setModalVisible(false), onSelectItem(item);
-                }}
-              />
-            )}
-          />
+          <View>
+            <FlatList
+              contentContainerStyle={styles.grid}
+              data={items}
+              keyExtractor={(item) => item.value.toString()}
+              renderItem={({ item }) => (
+                <PickerItem
+                  label={item.label}
+                  color={item.color}
+                  iconName={item.icon}
+                  onPress={() => {
+                    setModalVisible(false), onSelectItem(item);
+                  }}
+                />
+              )}
+            />
+          </View>
         </Screen>
       </Modal>
     </>
@@ -80,10 +84,16 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.WHITE,
     borderRadius: 25,
     flexDirection: "row",
-    // width: "85%",
     padding: 15,
     marginVertical: 10,
     alignItems: "center",
+  },
+  grid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-evenly",
+    gap: 10,
+    marginTop: 10,
   },
   icon: {
     marginRight: 5,
