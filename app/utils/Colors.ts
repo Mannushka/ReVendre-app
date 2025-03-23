@@ -6,6 +6,8 @@ const Colors = {
   RED_DANGER: "#E32636",
   BEIGE_LIGHT: "#faf0e6",
   RED: "#CC0000",
+  //buttons
+  BUTTON_ORANGE: "#f2855e",
   //categories
   FURNITURE_RED: "#fc5c65",
   CARS_ORANGE: "#fd9644",
