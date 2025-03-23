@@ -37,7 +37,9 @@ export const ListItem: React.FC<ListItemsProps> = ({
           <Image style={styles.image} source={imageSource} />
           <View style={styles.textContainer}>
             <Text style={styles.title}>{title}</Text>
-            <Text style={styles.subTitle}>{subTitle}</Text>
+            <Text numberOfLines={3} style={styles.subTitle}>
+              {subTitle}
+            </Text>
           </View>
           <View style={styles.icon}>
             {showChevrons && (
@@ -64,7 +66,7 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     gap: 10,
-    // backgroundColor: Colors.WHITE,
+    width: "70%",
   },
   title: {
     fontWeight: 600,
