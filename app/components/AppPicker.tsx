@@ -107,12 +107,12 @@ const styles = StyleSheet.create({
   },
   text: {
     flex: 1,
-    fontSize: 16,
+    fontSize: 18,
     color: Colors.BLACK,
   },
   placeholder: {
     flex: 1,
-    fontSize: 16,
+    fontSize: 18,
     color: Colors.GRAY_LIGHT300,
   },
 });
