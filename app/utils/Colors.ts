@@ -6,6 +6,16 @@ const Colors = {
   RED_DANGER: "#E32636",
   BEIGE_LIGHT: "#faf0e6",
   RED: "#CC0000",
+  //categories
+  FURNITURE_RED: "#fc5c65",
+  CARS_ORANGE: "#fd9644",
+  CAMERAS_YELLOW: "#fed330",
+  GAMES_GREEN: "#26de81",
+  CLOTHING_GREEN: "#2bcbba",
+  SPORTS_BLUE: "#45aaf2",
+  MOVIES_MUSIC_BLUE: "#4b7bec",
+  BOOKS_PURPLE: "#8f71ff",
+  OTHERS_BLUE: "#82acff",
 };
 
 export default Colors;
