@@ -15,21 +15,6 @@ import { ListingEditScreen } from "./app/screens/ListingEditScreen";
 import { useState } from "react";
 
 export default function App() {
-  const items = [
-    {
-      label: "Furniture",
-      value: 1,
-    },
-    {
-      label: "Clothing",
-      value: 2,
-    },
-    {
-      label: "Electronics",
-      value: 3,
-    },
-  ];
-  const [category, setCategory] = useState();
   return (
     <GestureHandlerRootView>
       {/* <ProfileScreen /> */}
