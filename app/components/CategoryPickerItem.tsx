@@ -2,13 +2,8 @@ import React from "react";
 import { TouchableOpacity, Text, StyleSheet, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Colors from "../utils/Colors";
-import { Category } from "../types/Category";
 import { PickerItemProps } from "../types/PickerItemProps";
 
-// interface CategoryPickerItemProps {
-//   item: Category;
-//   onPress: () => void;
-// }
 export const CategoryPickerItem: React.FC<PickerItemProps> = ({
   item,
   onPress,
