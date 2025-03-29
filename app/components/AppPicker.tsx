@@ -16,6 +16,7 @@ import { Screen } from "./Screen";
 import { PickerItem } from "./PickerItem";
 import { Category } from "../types/Category";
 import { CategoryPickerItem } from "./CategoryPickerItem";
+import { PickerItemProps } from "../types/PickerItemProps";
 
 interface AppPickerProps {
   icon?: IconName;
@@ -24,9 +25,7 @@ interface AppPickerProps {
   pickerWidth?: DimensionValue;
   selectedItem: Category;
   onSelectItem: (item: Category) => void;
-  PickerItemComponent:
-    | React.FC<{ item: Category; onPress: () => void }>
-    | React.FC<{ item: Category; onPress: () => void }>;
+  PickerItemComponent: React.FC<PickerItemProps>;
 }
 export const AppPicker: React.FC<AppPickerProps> = ({
   icon,

@@ -3,15 +3,16 @@ import { TouchableOpacity, Text, StyleSheet, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Colors from "../utils/Colors";
 import { Category } from "../types/Category";
+import { PickerItemProps } from "../types/PickerItemProps";
 
-interface CategoryPickerItemProps {
-  item: Category;
-  onPress: () => void;
-}
-export const CategoryPickerItem: React.FC<CategoryPickerItemProps> = ({
+// interface CategoryPickerItemProps {
+//   item: Category;
+//   onPress: () => void;
+// }
+export const CategoryPickerItem: React.FC<PickerItemProps> = ({
   item,
   onPress,
-}): JSX.Element => {
+}) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
       <View style={[styles.iconContainer, { backgroundColor: item.color }]}>

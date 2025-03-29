@@ -3,10 +3,12 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { IconName } from "../types/IconName";
 import Colors from "../utils/Colors";
 import { Category } from "../types/Category";
-interface PickerItemProps {
-  item: Category;
-  onPress: () => void;
-}
+import { PickerItemProps } from "../types/PickerItemProps";
+
+// interface PickerItemProps {
+//   item: Category;
+//   onPress: () => void;
+// }
 
 export const PickerItem: React.FC<PickerItemProps> = ({
   item,

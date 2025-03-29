@@ -4,6 +4,7 @@ import { AppPicker } from "../AppPicker";
 import { IconName } from "../../types/IconName";
 import { Category } from "../../types/Category";
 import { ElementType } from "react";
+import { PickerItemProps } from "../../types/PickerItemProps";
 
 interface AppFormPickerProps {
   icon?: IconName;
@@ -11,7 +12,7 @@ interface AppFormPickerProps {
   items: Category[];
   fieldName: string;
   pickerWidth?: DimensionValue;
-  PickerItemComponent: React.FunctionComponent;
+  PickerItemComponent: React.FC<PickerItemProps>;
 }
 
 export const AppFormPicker: React.FC<AppFormPickerProps> = ({
