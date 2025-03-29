@@ -11,11 +11,9 @@ import {
 } from "react-native";
 import Colors from "../utils/Colors";
 import { IconName } from "../types/IconName";
-import { ElementType, useState } from "react";
+import { useState } from "react";
 import { Screen } from "./Screen";
-import { PickerItem } from "./PickerItem";
 import { Category } from "../types/Category";
-import { CategoryPickerItem } from "./CategoryPickerItem";
 import { PickerItemProps } from "../types/PickerItemProps";
 
 interface AppPickerProps {
