@@ -11,10 +11,12 @@ import {
 } from "react-native";
 import Colors from "../utils/Colors";
 import { IconName } from "../types/IconName";
-import { useState } from "react";
+import { ElementType, useState } from "react";
 import { Screen } from "./Screen";
 import { PickerItem } from "./PickerItem";
 import { Category } from "../types/Category";
+import { CategoryPickerItem } from "./CategoryPickerItem";
+import { PickerItemProps } from "../types/PickerItemProps";
 
 interface AppPickerProps {
   icon?: IconName;
@@ -23,6 +25,7 @@ interface AppPickerProps {
   pickerWidth?: DimensionValue;
   selectedItem: Category;
   onSelectItem: (item: Category) => void;
+  PickerItemComponent: React.FC<PickerItemProps>;
 }
 export const AppPicker: React.FC<AppPickerProps> = ({
   icon,
@@ -31,6 +34,7 @@ export const AppPicker: React.FC<AppPickerProps> = ({
   pickerWidth,
   selectedItem,
   onSelectItem,
+  PickerItemComponent,
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const width: DimensionValue = pickerWidth ? pickerWidth : "100%";
@@ -63,10 +67,10 @@ export const AppPicker: React.FC<AppPickerProps> = ({
               data={items}
               keyExtractor={(item) => item.value.toString()}
               renderItem={({ item }) => (
-                <PickerItem
-                  label={item.label}
-                  color={item.color}
-                  iconName={item.icon}
+                <PickerItemComponent
+                  item={item}
+                  // color={item.color}
+                  // iconName={item.icon}
                   onPress={() => {
                     setModalVisible(false), onSelectItem(item);
                   }}

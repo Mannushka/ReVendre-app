@@ -17,9 +17,12 @@ import { useState } from "react";
 export default function App() {
   return (
     <GestureHandlerRootView>
+      {/* <WelcomeScreen /> */}
+      {/* <ViewImageScreen /> */}
       {/* <ProfileScreen /> */}
       {/* <ListingDetailsScreen /> */}
       {/* <RegisterScreen /> */}
+      {/* <LoginScreen /> */}
       <ListingEditScreen />
       {/* <MessagesScreen /> */}
     </GestureHandlerRootView>

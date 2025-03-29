@@ -9,6 +9,8 @@ import { View, StyleSheet } from "react-native";
 import * as yup from "yup";
 import Colors from "../utils/Colors";
 import categories from "../data/Categories";
+import { CategoryPickerItem } from "../components/CategoryPickerItem";
+import { PickerItem } from "../components/PickerItem";
 
 export const ListingEditScreen = () => {
   const initialValues = {
@@ -44,6 +46,7 @@ export const ListingEditScreen = () => {
             items={categories}
             fieldName="category"
             placeholder="Category"
+            PickerItemComponent={CategoryPickerItem}
           ></Picker>
           <FormField
             fieldName="description"
