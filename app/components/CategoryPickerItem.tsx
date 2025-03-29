@@ -1,26 +1,26 @@
+import React from "react";
 import { TouchableOpacity, Text, StyleSheet, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { IconName } from "../types/IconName";
 import Colors from "../utils/Colors";
 import { Category } from "../types/Category";
-interface PickerItemProps {
+
+interface CategoryPickerItemProps {
   item: Category;
   onPress: () => void;
 }
-
-export const PickerItem: React.FC<PickerItemProps> = ({
+export const CategoryPickerItem: React.FC<CategoryPickerItemProps> = ({
   item,
   onPress,
 }): JSX.Element => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
-      {/* <View style={[styles.iconContainer, { backgroundColor: item.color }]}>
+      <View style={[styles.iconContainer, { backgroundColor: item.color }]}>
         <MaterialCommunityIcons
           name={item.icon}
-          size={35}
+          size={60}
           color={Colors.WHITE}
         />
-      </View> */}
+      </View>
       <Text style={styles.text}>{item.label} </Text>
     </TouchableOpacity>
   );
@@ -34,19 +34,19 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     marginBottom: 5,
   },
-  // iconContainer: {
-  //   width: 80,
-  //   height: 80,
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  //   margin: 10,
-  //   padding: 5,
-  //   borderRadius: "50%",
-  // },
-
+  iconContainer: {
+    width: 80,
+    height: 80,
+    alignItems: "center",
+    justifyContent: "center",
+    margin: 10,
+    padding: 5,
+    borderRadius: "50%",
+  },
   text: {
-    fontWeight: "600",
-    fontFamily: "Gill Sans",
-    fontSize: 16,
+    flex: 1,
+    fontSize: 18,
+    color: Colors.BLACK,
+    textAlign: "center",
   },
 });
