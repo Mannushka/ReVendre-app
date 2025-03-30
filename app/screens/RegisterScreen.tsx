@@ -3,6 +3,7 @@ import { Screen } from "../components/Screen";
 import { AppForm, AppFormField, SubmitButton } from "../components/forms";
 import * as yup from "yup";
 import Colors from "../utils/Colors";
+import { PageTitle } from "../components/PageTitle";
 
 export const RegisterScreen = () => {
   const validationSchema = yup.object().shape({
@@ -12,6 +13,7 @@ export const RegisterScreen = () => {
   });
   return (
     <Screen>
+      <PageTitle titleString="Let's create you an account!" />
       <AppForm
         initialValues={{ username: "", email: "", password: "" }}
         validationSchema={validationSchema}
@@ -59,6 +61,6 @@ export const RegisterScreen = () => {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    marginTop: 100,
+    // marginTop: 100,
   },
 });

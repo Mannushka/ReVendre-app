@@ -15,6 +15,7 @@ import { useState } from "react";
 import { Screen } from "./Screen";
 import { Category } from "../types/Category";
 import { PickerItemProps } from "../types/PickerItemProps";
+import { PageTitle } from "./PageTitle";
 
 interface AppPickerProps {
   icon?: IconName;
@@ -59,7 +60,7 @@ export const AppPicker: React.FC<AppPickerProps> = ({
       <Modal visible={modalVisible} animationType="slide">
         <Screen>
           <View>
-            <Text>Choose category</Text>
+            <PageTitle titleString="Choose category" />
             <FlatList
               contentContainerStyle={styles.grid}
               data={items}

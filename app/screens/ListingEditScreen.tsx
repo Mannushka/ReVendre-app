@@ -11,6 +11,7 @@ import Colors from "../utils/Colors";
 import categories from "../data/Categories";
 import { CategoryPickerItem } from "../components/CategoryPickerItem";
 import { PickerItem } from "../components/PickerItem";
+import { PageTitle } from "../components/PageTitle";
 
 export const ListingEditScreen = () => {
   const initialValues = {
@@ -28,6 +29,7 @@ export const ListingEditScreen = () => {
 
   return (
     <Screen>
+      <PageTitle titleString="Add a new listing" />
       <AppForm
         initialValues={initialValues}
         validationSchema={validationSchema}

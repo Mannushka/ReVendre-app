@@ -3,6 +3,8 @@ import { Screen } from "../components/Screen";
 import Colors from "../utils/Colors";
 import * as yup from "yup";
 import { AppForm, AppFormField, SubmitButton } from "../components/forms";
+import { PageTitle } from "../components/PageTitle";
+
 const validationSchema = yup.object().shape({
   email: yup.string().required().email().label("Email"),
   password: yup.string().required().min(8).label("Password"),
@@ -10,6 +12,7 @@ const validationSchema = yup.object().shape({
 export const LoginScreen = () => {
   return (
     <Screen>
+      <PageTitle titleString="Welcome back!" />
       {/* <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={(values) => console.log(values)}
@@ -17,6 +20,7 @@ export const LoginScreen = () => {
       >
         {() => (
           <View style={styles.container}> */}
+
       <AppForm
         initialValues={{ email: "", password: "" }}
         onSubmit={(values) => console.log(values)}
@@ -83,6 +87,6 @@ export const LoginScreen = () => {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    marginTop: 100,
+    // marginTop: 10,
   },
 });
