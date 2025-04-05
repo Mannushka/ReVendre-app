@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, View, Image } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Colors from "../utils/Colors";
+import { Screen } from "../components/Screen";
 
 export default function ViewImageScreen() {
   const image = {
@@ -8,27 +9,30 @@ export default function ViewImageScreen() {
   };
 
   return (
-    <View style={styles.container}>
+    <Screen>
+      {/* <View style={styles.container}> */}
       <View style={styles.iconContainer}>
         <View style={styles.icon}>
-          <MaterialCommunityIcons name="close" size={24} color="white" />
+          <MaterialCommunityIcons name="close" size={24} color={Colors.BLACK} />
         </View>
         <View style={styles.icon}>
           <MaterialCommunityIcons
             name="trash-can-outline"
             size={25}
-            color="white"
+            color={Colors.BLACK}
           />
         </View>
       </View>
-      <Image source={image} style={styles.image}></Image>;
-    </View>
+      <View style={styles.imageContainer}>
+        <Image source={image} style={styles.image}></Image>;{/* </View> */}
+      </View>
+    </Screen>
   );
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    // justifyContent: "center",
     alignItems: "center",
     backgroundColor: Colors.BLACK,
   },
@@ -42,9 +46,22 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
-    margin: 5,
+    marginTop: 20,
     paddingHorizontal: 20,
   },
+  imageContainer: {
+    flex: 1,
+    paddingHorizontal: 15,
+    shadowColor: Colors.SHADOW_BLACK,
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+  },
 
-  image: { width: "100%", height: "60%" },
+  image: {
+    width: "100%",
+    height: "50%",
+    alignSelf: "center",
+    borderRadius: "2%",
+  },
 });
