@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: "8%",
     padding: 10,
-    opacity: 0.8,
+    opacity: 0.9,
     alignSelf: "center",
     marginTop: 20,
   },
