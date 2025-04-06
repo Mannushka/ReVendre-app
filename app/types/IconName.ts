@@ -17,4 +17,5 @@ export type IconName =
   | "basketball"
   | "headphones"
   | "book-open-variant"
-  | "duck";
+  | "duck"
+  | "camera";
