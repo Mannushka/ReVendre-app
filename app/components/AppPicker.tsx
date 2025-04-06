@@ -59,7 +59,7 @@ export const AppPicker: React.FC<AppPickerProps> = ({
       </TouchableWithoutFeedback>
       <Modal visible={modalVisible} animationType="slide">
         <Screen>
-          <View>
+          <View style={styles.categoriesList}>
             <PageTitle titleString="Choose category" />
             <FlatList
               contentContainerStyle={styles.grid}
@@ -89,6 +89,9 @@ export const AppPicker: React.FC<AppPickerProps> = ({
 };
 
 const styles = StyleSheet.create({
+  categoriesList: {
+    flex: 1,
+  },
   container: {
     backgroundColor: Colors.WHITE,
     borderRadius: 25,
