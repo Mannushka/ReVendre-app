@@ -3,5 +3,5 @@ export type Category = {
   label: string;
   value: number;
   color: string;
-  icon: string;
+  icon: IconName
 };
