@@ -1,15 +1,14 @@
 import { View, StyleSheet, Image, TouchableOpacity, Text } from "react-native";
-import { ImageInputIcon } from "./ImageInputIcon";
 import { Screen } from "../Screen";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Colors from "../../utils/Colors";
 
 interface ImageInputProps {
-  imageUri: string | null;
+  // imageUri: string | null;
   onChangeImage: () => void;
 }
 export const ImageInput: React.FC<ImageInputProps> = ({
-  imageUri,
+  // imageUri,
   onChangeImage,
 }) => {
   return (
