@@ -1,10 +1,10 @@
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
 import { Screen } from "../Screen";
 import { ImageInput } from "./ImageInput";
 import { ImageItem } from "../ImageItem";
-import { template } from "@babel/core";
+
 export const ImageInputList = () => {
   const [imageUris, setImageUris] = useState<string[] | []>([]);
 
@@ -24,8 +24,8 @@ export const ImageInputList = () => {
         const imageUri = selectedImages[i].uri;
         if (imageUri) newImageArray.push(imageUri);
       }
-      setImageUris(newImageArray);
-      console.log("image removed");
+      setImageUris([...imageUris, ...newImageArray]);
+      console.log("image added");
     }
   };
 
@@ -34,11 +34,8 @@ export const ImageInputList = () => {
     setImageUris(newImageUris);
   };
 
-  // const images = imageUris.map((imageUri) => (
-  //   <Image source={{ uri: imageUri }} style={styles.image} />
-  // ));
-  const images = imageUris.map((imageUri) => (
-    <View style={styles.gridItem}>
+  const images = imageUris.map((imageUri, index) => (
+    <View key={index} style={styles.gridItem}>
       <ImageItem
         imageUri={imageUri}
         width={100}
@@ -63,6 +60,7 @@ export const ImageInputList = () => {
 
 const styles = StyleSheet.create({
   container: {
+    // width: "90%",
     flexDirection: "row",
     paddingLeft: 20,
     flexWrap: "wrap",
