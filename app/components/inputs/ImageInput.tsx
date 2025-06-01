@@ -13,15 +13,15 @@ export const ImageInput: React.FC<ImageInputProps> = ({
 }) => {
   return (
     <Screen>
-      <View style={styles.container}>
-        <TouchableOpacity onPress={onChangeImage}>
+      <TouchableOpacity onPress={onChangeImage}>
+        <View style={styles.container}>
           <MaterialCommunityIcons
             name="camera"
             size={50}
             color={Colors.DARK_GRAY}
           />
-        </TouchableOpacity>
-      </View>
+        </View>
+      </TouchableOpacity>
     </Screen>
   );
 };
