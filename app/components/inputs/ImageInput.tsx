@@ -1,28 +1,21 @@
-import { View, StyleSheet, Image, TouchableOpacity, Text } from "react-native";
-import { Screen } from "../Screen";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Colors from "../../utils/Colors";
 
 interface ImageInputProps {
-  // imageUri: string | null;
-  onChangeImage: () => void;
+  addImage: () => void;
 }
-export const ImageInput: React.FC<ImageInputProps> = ({
-  // imageUri,
-  onChangeImage,
-}) => {
+export const ImageInput: React.FC<ImageInputProps> = ({ addImage }) => {
   return (
-    <Screen>
-      <TouchableOpacity onPress={onChangeImage}>
-        <View style={styles.container}>
-          <MaterialCommunityIcons
-            name="camera"
-            size={50}
-            color={Colors.DARK_GRAY}
-          />
-        </View>
-      </TouchableOpacity>
-    </Screen>
+    <TouchableOpacity onPress={addImage}>
+      <View style={styles.container}>
+        <MaterialCommunityIcons
+          name="camera"
+          size={50}
+          color={Colors.DARK_GRAY}
+        />
+      </View>
+    </TouchableOpacity>
   );
 };
 
