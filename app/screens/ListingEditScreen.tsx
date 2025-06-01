@@ -12,6 +12,7 @@ import categories from "../data/Categories";
 import { CategoryPickerItem } from "../components/CategoryPickerItem";
 import { PickerItem } from "../components/PickerItem";
 import { PageTitle } from "../components/PageTitle";
+import { FormImagePicker } from "../components/forms/FormImagePicker";
 
 export const ListingEditScreen = () => {
   const initialValues = {
@@ -19,12 +20,14 @@ export const ListingEditScreen = () => {
     price: "",
     category: null,
     description: "",
+    images: [],
   };
   const validationSchema = yup.object().shape({
     title: yup.string().required().min(1).label("Title"),
     price: yup.number().required().min(1).max(10000).label("Price"),
     category: yup.object().required().nullable().label("Category"),
     description: yup.string().label("Description"),
+    images: yup.array().min(1, "Please add at least one image"),
   });
 
   return (
@@ -36,6 +39,7 @@ export const ListingEditScreen = () => {
         onSubmit={(values) => console.log(values)}
       >
         <View style={styles.container}>
+          <FormImagePicker fieldName="images" />
           <FormField fieldName="title" placeholder="Title"></FormField>
           <FormField
             fieldName="price"
