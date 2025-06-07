@@ -13,8 +13,22 @@ import { CategoryPickerItem } from "../components/CategoryPickerItem";
 import { PickerItem } from "../components/PickerItem";
 import { PageTitle } from "../components/PageTitle";
 import { FormImagePicker } from "../components/forms/FormImagePicker";
-
+import { useEffect, useState } from "react";
+import * as Location from "expo-location";
+import { UserLocation } from "../types/UserLocation";
 export const ListingEditScreen = () => {
+  const [location, setLocation] = useState<UserLocation | null>(null);
+  const getLocation = async () => {
+    const { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== "granted") return;
+    const {
+      coords: { latitude, longitude },
+    } = await Location.getCurrentPositionAsync({});
+    setLocation({ latitude, longitude });
+  };
+  useEffect(() => {
+    getLocation();
+  }, []);
   const initialValues = {
     title: "",
     price: "",
@@ -36,7 +50,7 @@ export const ListingEditScreen = () => {
       <AppForm
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => console.log(values, "location:", location)}
       >
         <View style={styles.container}>
           <FormImagePicker fieldName="images" />
