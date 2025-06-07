@@ -10,25 +10,12 @@ import * as yup from "yup";
 import Colors from "../utils/Colors";
 import categories from "../data/Categories";
 import { CategoryPickerItem } from "../components/CategoryPickerItem";
-import { PickerItem } from "../components/PickerItem";
 import { PageTitle } from "../components/PageTitle";
 import { FormImagePicker } from "../components/forms/FormImagePicker";
-import { useEffect, useState } from "react";
-import * as Location from "expo-location";
-import { UserLocation } from "../types/UserLocation";
+import { useLocation } from "../hooks/useLocation";
+
 export const ListingEditScreen = () => {
-  const [location, setLocation] = useState<UserLocation | null>(null);
-  const getLocation = async () => {
-    const { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== "granted") return;
-    const {
-      coords: { latitude, longitude },
-    } = await Location.getCurrentPositionAsync({});
-    setLocation({ latitude, longitude });
-  };
-  useEffect(() => {
-    getLocation();
-  }, []);
+  const location = useLocation();
   const initialValues = {
     title: "",
     price: "",
