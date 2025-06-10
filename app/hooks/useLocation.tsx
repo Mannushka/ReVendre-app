@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { UserLocation } from "../types/UserLocation";
 import * as Location from "expo-location";
+
 export const useLocation = () => {
   const [location, setLocation] = useState<UserLocation | null>(null);
   try {
