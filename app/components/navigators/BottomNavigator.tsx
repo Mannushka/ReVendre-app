@@ -6,6 +6,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { IconName } from "../../types/IconName";
 import Colors from "../../utils/Colors";
 import { FeedNavigator } from "./FeedNavigator";
+import ProfileNavigator from "./ProfileNavigator";
 export const BottomNavigator = () => {
   const Tab = createBottomTabNavigator();
   return (
@@ -16,7 +17,7 @@ export const BottomNavigator = () => {
           let iconName: IconName;
           if (route.name === "Feed") {
             iconName = "note-multiple";
-          } else if (route.name === "Account") {
+          } else if (route.name === "My profile") {
             iconName = "account";
           } else if (route.name === "New listing") {
             iconName = "plus-circle";
@@ -34,7 +35,7 @@ export const BottomNavigator = () => {
     >
       <Tab.Screen name="Feed" component={FeedNavigator} />
       <Tab.Screen name="New listing" component={ListingEditScreen} />
-      <Tab.Screen name="Account" component={ProfileScreen} />
+      <Tab.Screen name="My profile" component={ProfileNavigator} />
     </Tab.Navigator>
   );
 };
