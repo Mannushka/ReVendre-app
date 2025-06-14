@@ -3,6 +3,7 @@ import Colors from "../../utils/Colors";
 import { ProfileScreen } from "../../screens";
 import { MessagesScreen } from "../../screens";
 import { ProfileRootStackParamList } from "../../types/NavigationTypes";
+import routes from "./routes";
 
 const ProfileNavigator = () => {
   const RootStack = createStackNavigator<ProfileRootStackParamList>();
@@ -13,8 +14,8 @@ const ProfileNavigator = () => {
         headerShown: false,
       }}
     >
-      <RootStack.Screen name="ProfileScreen" component={ProfileScreen} />
-      <RootStack.Screen name="MessagesScreen" component={MessagesScreen} />
+      <RootStack.Screen name={routes.PROFILE} component={ProfileScreen} />
+      <RootStack.Screen name={routes.MESSAGES} component={MessagesScreen} />
     </RootStack.Navigator>
   );
 };
