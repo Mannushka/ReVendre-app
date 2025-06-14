@@ -18,6 +18,7 @@ export const FeedNavigator = () => {
       screenOptions={{
         headerStyle: { backgroundColor: Colors.WHITE },
         headerShown: false,
+        animation: "slide_from_bottom",
       }}
     >
       <RootStack.Screen name="ListingsScreen" component={ListingsScreen} />
