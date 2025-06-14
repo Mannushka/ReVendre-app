@@ -6,6 +6,7 @@ import { ListItemDeleteAction } from "../components/lists/ListItemDeleteAction";
 import { useState } from "react";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { ProfileRootStackParamList } from "../types/NavigationTypes";
+import routes from "../components/navigators/routes";
 
 interface MessagesScreenProps {
   navigation: MessagesScreenNavigationProp;
@@ -18,7 +19,7 @@ interface MessagesScreenProps {
 
 type MessagesScreenNavigationProp = NativeStackNavigationProp<
   ProfileRootStackParamList,
-  "MessagesScreen"
+  typeof routes.MESSAGES
 >;
 
 export const MessagesScreen: React.FC<MessagesScreenProps> = ({

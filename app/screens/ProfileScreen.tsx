@@ -9,6 +9,7 @@ import { useNavigation } from "@react-navigation/native";
 import { ListingEditScreen } from "./ListingEditScreen";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { ProfileRootStackParamList } from "../types/NavigationTypes";
+import routes from "../components/navigators/routes";
 
 type menuItem = {
   icon: IconName;
@@ -27,14 +28,14 @@ interface ProfileScreenProps {
 
 type ProfileScreenNavigationProp = NativeStackNavigationProp<
   ProfileRootStackParamList,
-  "ProfileScreen",
-  "MessagesScreen"
+  typeof routes.PROFILE,
+  typeof routes.MESSAGES
 >;
 
 export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const menuItems: menuItem[] = [
     { icon: "format-list-bulleted", title: "My listings", targetScreen: "" },
-    { icon: "email", title: "My messages", targetScreen: "MessagesScreen" },
+    { icon: "email", title: "My messages", targetScreen: routes.MESSAGES },
   ];
   // const navigation = useNavigation()
   return (
@@ -55,7 +56,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
               <MenuItem
                 title={item.title}
                 icon={item.icon}
-                onPress={() => navigation.navigate("MessagesScreen")}
+                onPress={() => navigation.navigate(routes.MESSAGES)}
               />
             </View>
           )}
