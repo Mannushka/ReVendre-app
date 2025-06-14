@@ -4,6 +4,7 @@ import { ListItem } from "../components/lists/ListItem";
 import { Screen } from "../components/Screen";
 import { Listing } from "../types/Listing";
 import { useRoute, RouteProp } from "@react-navigation/native";
+import routes from "../components/navigators/routes";
 
 type RootStackParamList = {
   ListingsScreen: undefined;
@@ -17,7 +18,7 @@ type RootStackParamList = {
 
 type ListingDetailsRouteProp = RouteProp<
   RootStackParamList,
-  "ListingDetailsScreen"
+  typeof routes.LISTING_DETAILS
 >;
 
 export const ListingDetailsScreen = () => {

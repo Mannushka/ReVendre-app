@@ -5,6 +5,7 @@ import { Screen } from "../components/Screen";
 import { Listing } from "../types/Listing";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useNavigation } from "@react-navigation/native";
+import routes from "../components/navigators/routes";
 type RootStackParamList = {
   ListingsScreen: undefined;
   ListingDetailsScreen: {
@@ -17,8 +18,8 @@ type RootStackParamList = {
 // Define the navigation prop type specific to this screen
 type ListingsScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
-  "ListingsScreen",
-  "ListingDetailsScreen"
+  typeof routes.LISTINGS,
+  typeof routes.LISTING_DETAILS
 >;
 
 const ListingsScreen: React.FC<{
@@ -34,7 +35,7 @@ const ListingsScreen: React.FC<{
             title={item.title}
             subTitle={item.price}
             image={item.imageUrl}
-            onPress={() => navigation.navigate("ListingDetailsScreen", item)}
+            onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
           />
         )}
       />

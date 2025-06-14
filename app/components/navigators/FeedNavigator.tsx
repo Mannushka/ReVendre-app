@@ -3,6 +3,7 @@ import Colors from "../../utils/Colors";
 import ListingsScreen from "../../screens/ListingsScreen";
 import { ListingDetailsScreen } from "../../screens";
 import { Listing } from "../../types/Listing";
+import routes from "./routes";
 
 type RootStackParamList = {
   ListingsScreen: undefined;
@@ -24,9 +25,9 @@ export const FeedNavigator = () => {
         animation: "slide_from_bottom",
       }}
     >
-      <RootStack.Screen name="ListingsScreen" component={ListingsScreen} />
+      <RootStack.Screen name={routes.LISTINGS} component={ListingsScreen} />
       <RootStack.Screen
-        name="ListingDetailsScreen"
+        name={routes.LISTING_DETAILS}
         component={ListingDetailsScreen}
       />
     </RootStack.Navigator>
