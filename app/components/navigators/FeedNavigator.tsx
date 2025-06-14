@@ -1,11 +1,14 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { MessagesScreen } from "../../screens/MessagesScreen";
 import Colors from "../../utils/Colors";
-import { ProfileScreen } from "../../screens/ProfileScreen";
-import MessageScreen from "../../screens/MessageScreen";
+import ListingsScreen from "../../screens/ListingsScreen";
+import { ListingDetailsScreen } from "../../screens";
+import { Listing } from "../../types/Listing";
+
 type RootStackParamList = {
-  Feed: undefined;
-  Messages: { messageId: number };
+  ListingsScreen: undefined;
+  ListingDetailsScreen: {
+    listing: { id: number; title: string; price: string; imageUrl: string };
+  };
 };
 
 export const FeedNavigator = () => {
@@ -14,10 +17,14 @@ export const FeedNavigator = () => {
     <RootStack.Navigator
       screenOptions={{
         headerStyle: { backgroundColor: Colors.WHITE },
+        headerShown: false,
       }}
     >
-      <RootStack.Screen name="Feed" component={MessagesScreen} />
-      <RootStack.Screen name="Messages" component={MessageScreen} />
+      <RootStack.Screen name="ListingsScreen" component={ListingsScreen} />
+      <RootStack.Screen
+        name="ListingDetailsScreen"
+        component={ListingDetailsScreen}
+      />
     </RootStack.Navigator>
   );
 };
