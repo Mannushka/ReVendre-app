@@ -4,17 +4,39 @@ import { Screen } from "../components/Screen";
 import Colors from "../utils/Colors";
 import { View, StyleSheet, FlatList } from "react-native";
 import { IconName } from "../types/IconName";
+import { ButtonComponent } from "../components/ButtonComponent";
+import { useNavigation } from "@react-navigation/native";
+import { ListingEditScreen } from "./ListingEditScreen";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { ProfileRootStackParamList } from "../types/NavigationTypes";
 
 type menuItem = {
   icon: IconName;
   title: string;
+  targetScreen: string;
 };
-export const ProfileScreen = () => {
-  const menuItems: menuItem[] = [
-    { icon: "format-list-bulleted", title: "My listings" },
-    { icon: "email", title: "My emails" },
-  ];
 
+interface ProfileScreenProps {
+  navigation: ProfileScreenNavigationProp;
+}
+
+// type RootStackParamList = {
+//   Profile: undefined; // No params expected for ProfileScreen
+//   "New listing": undefined; // No params expected for ListingEditScreen
+// };
+
+type ProfileScreenNavigationProp = NativeStackNavigationProp<
+  ProfileRootStackParamList,
+  "ProfileScreen",
+  "MessagesScreen"
+>;
+
+export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
+  const menuItems: menuItem[] = [
+    { icon: "format-list-bulleted", title: "My listings", targetScreen: "" },
+    { icon: "email", title: "My messages", targetScreen: "MessagesScreen" },
+  ];
+  // const navigation = useNavigation()
   return (
     <Screen>
       <View style={styles.listItem}>
@@ -30,14 +52,26 @@ export const ProfileScreen = () => {
           keyExtractor={(menuItem) => menuItem.title}
           renderItem={({ item }) => (
             <View style={styles.item}>
-              <MenuItem title={item.title} icon={item.icon} />
+              <MenuItem
+                title={item.title}
+                icon={item.icon}
+                onPress={() => navigation.navigate("MessagesScreen")}
+              />
             </View>
           )}
         />
       </View>
       <View>
-        <MenuItem title="Log out" icon="logout" />
+        <MenuItem
+          title="Log out"
+          icon="logout"
+          onPress={() => console.log("log out pressed")}
+        />
       </View>
+      {/* <ButtonComponent
+        title="New listing"
+        onPress={() => navigation.navigate("New listing")}
+      ></ButtonComponent> */}
     </Screen>
   );
 };
