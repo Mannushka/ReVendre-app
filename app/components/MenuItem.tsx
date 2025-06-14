@@ -6,10 +6,11 @@ import { IconName } from "../types/IconName";
 interface MenuItemProps {
   title: string;
   icon: IconName;
+  onPress: () => void;
 }
-export const MenuItem: React.FC<MenuItemProps> = ({ title, icon }) => {
+export const MenuItem: React.FC<MenuItemProps> = ({ title, icon, onPress }) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <View>
         <MaterialCommunityIcons name={icon} size={35} />
       </View>
