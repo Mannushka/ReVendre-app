@@ -7,7 +7,10 @@ import { Listing } from "../../types/Listing";
 type RootStackParamList = {
   ListingsScreen: undefined;
   ListingDetailsScreen: {
-    listing: { id: number; title: string; price: string; imageUrl: string };
+    id: number;
+    title: string;
+    price: string;
+    imageUrl: string;
   };
 };
 
