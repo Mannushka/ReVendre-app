@@ -1,8 +1,9 @@
-export { WelcomeScreen } from "./WelcomeScreen";
-export { LoginScreen } from "./LoginScreen";
-export { RegisterScreen } from "./RegisterScreen";
-export { ListingEditScreen } from "./ListingEditScreen";
-export { ListingDetailsScreen } from "./ListingDetailsScreen";
-export { MessagesScreen } from "./MessagesScreen";
-export { ProfileScreen } from "./ProfileScreen";
-export { ViewImageScreen } from "./ViewImageScreen";
+export { default as WelcomeScreen } from "./WelcomeScreen";
+export { default as LoginScreen } from "./LoginScreen";
+export { default as RegisterScreen } from "./RegisterScreen";
+export { default as ListingsScreen } from "./ListingsScreen";
+export { default as ListingEditScreen } from "./ListingEditScreen";
+export { default as ListingDetailsScreen } from "./ListingDetailsScreen";
+export { default as MessagesScreen } from "./MessagesScreen";
+export { default as ProfileScreen } from "./ProfileScreen";
+export { default as ViewImageScreen } from "./ViewImageScreen";
