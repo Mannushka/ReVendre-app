@@ -3,3 +3,8 @@ export type AuthRootStackParamList = {
   Login: undefined;
   Register: undefined;
 };
+
+export type ProfileRootStackParamList = {
+  ProfileScreen: undefined;
+  MessagesScreen: undefined;
+};
