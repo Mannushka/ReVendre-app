@@ -2,7 +2,6 @@ import { View, StyleSheet } from "react-native";
 import { ListingCard } from "../components/ListingCard";
 import { ListItem } from "../components/lists/ListItem";
 import { Screen } from "../components/Screen";
-import { Listing } from "../types/Listing";
 import { useRoute, RouteProp } from "@react-navigation/native";
 import routes from "../components/navigators/routes";
 
@@ -21,7 +20,7 @@ type ListingDetailsRouteProp = RouteProp<
   typeof routes.LISTING_DETAILS
 >;
 
-export const ListingDetailsScreen = () => {
+const ListingDetailsScreen = () => {
   const route = useRoute<ListingDetailsRouteProp>();
   const { id, title, price, imageUrl } = route.params;
   return (
@@ -44,3 +43,4 @@ const styles = StyleSheet.create({
     // alignItems: "center",
   },
 });
+export default ListingDetailsScreen;
