@@ -12,7 +12,7 @@ interface ImageItemProps {
   width: DimensionValue;
   height: DimensionValue;
   borderRadius?: string;
-  onRemoveImage: (imageUri: string) => void;
+  onRemoveImage?: (imageUri: string) => void;
 }
 
 export const ImageItem: React.FC<ImageItemProps> = ({
@@ -30,17 +30,20 @@ export const ImageItem: React.FC<ImageItemProps> = ({
           { width: width },
           { height: height },
           { borderRadius: borderRadius },
+          { resizeMode: "cover" },
         ]}
       />
-      <Pressable onPress={() => onRemoveImage(imageUri)}>
-        <View style={styles.iconContainer}>
-          <MaterialCommunityIcons
-            name="close"
-            size={20}
-            color={Colors.DARK_GRAY}
-          />
-        </View>
-      </Pressable>
+      {typeof onRemoveImage === "function" && (
+        <Pressable onPress={() => onRemoveImage(imageUri)}>
+          <View style={styles.iconContainer}>
+            <MaterialCommunityIcons
+              name="close"
+              size={20}
+              color={Colors.DARK_GRAY}
+            />
+          </View>
+        </Pressable>
+      )}
     </View>
   );
 };
