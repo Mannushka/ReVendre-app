@@ -18,4 +18,8 @@ export type IconName =
   | "headphones"
   | "book-open-variant"
   | "duck"
-  | "camera";
+  | "camera"
+  | "note-multiple"
+  | "help-circle"
+  | "plus-circle"
+  | "lock";
