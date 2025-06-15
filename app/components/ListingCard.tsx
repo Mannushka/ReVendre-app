@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
 } from "react-native";
+import { Platform } from "react-native";
 
 interface ListingCardProps {
   title: string;
@@ -57,6 +58,17 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: Colors.GRAY_LIGHT300,
+    ...Platform.select({
+      ios: {
+        shadowColor: "black",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 3,
+      },
+      android: {
+        elevation: 5,
+      },
+    }),
   },
   container: {
     alignItems: "center",
@@ -66,7 +78,7 @@ const styles = StyleSheet.create({
     height: 200,
     marginTop: 20,
     marginBottom: 10,
-    objectFit: "cover",
+    resizeMode: "cover",
   },
   textContainer: {
     flexDirection: "row",
@@ -77,14 +89,18 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 10,
     textAlign: "center",
-    fontSize: 25,
+    fontSize: 20,
+    fontFamily: "Helvetica-Bold",
     fontWeight: "500",
+    marginHorizontal: 2,
   },
 
   subTitle: {
     marginTop: 10,
     textAlign: "center",
-    fontSize: 15,
-    fontWeight: "300",
+    fontSize: 20,
+    fontFamily: "Helvetica-Bold",
+    fontWeight: "500",
+    marginHorizontal: 5,
   },
 });
