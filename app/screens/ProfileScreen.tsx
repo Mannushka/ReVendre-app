@@ -5,18 +5,25 @@ import Colors from "../utils/Colors";
 import { View, StyleSheet, FlatList } from "react-native";
 import { IconName } from "../types/IconName";
 import { ButtonComponent } from "../components/ButtonComponent";
-import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RouteProp } from "@react-navigation/native";
 import { ProfileRootStackParamList } from "../types/NavigationTypes";
 import routes from "../components/navigators/routes";
 
 type menuItem = {
   icon: IconName;
   title: string;
-  targetScreen: string;
+  targetScreen: keyof ProfileRootStackParamList;
 };
+
+type ProfileScreenRouteProp = RouteProp<
+  ProfileRootStackParamList,
+  typeof routes.PROFILE
+>;
 
 interface ProfileScreenProps {
   navigation: ProfileScreenNavigationProp;
+  route: ProfileScreenRouteProp;
 }
 
 // type RootStackParamList = {
@@ -31,7 +38,11 @@ type ProfileScreenNavigationProp = NativeStackNavigationProp<
 >;
 const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const menuItems: menuItem[] = [
-    { icon: "format-list-bulleted", title: "My listings", targetScreen: "" },
+    {
+      icon: "format-list-bulleted",
+      title: "My listings",
+      targetScreen: routes.MESSAGES, // REPLACE LATER
+    },
     { icon: "email", title: "My messages", targetScreen: routes.MESSAGES },
   ];
 
@@ -53,7 +64,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
               <MenuItem
                 title={item.title}
                 icon={item.icon}
-                onPress={() => navigation.navigate(routes.MESSAGES)}
+                onPress={() => navigation.navigate(item.targetScreen)}
               />
             </View>
           )}
