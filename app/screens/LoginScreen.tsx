@@ -9,7 +9,7 @@ const validationSchema = yup.object().shape({
   email: yup.string().required().email().label("Email"),
   password: yup.string().required().min(8).label("Password"),
 });
-export const LoginScreen = () => {
+const LoginScreen = () => {
   return (
     <Screen>
       <PageTitle titleString="Welcome back!" />
@@ -90,3 +90,5 @@ const styles = StyleSheet.create({
     // marginTop: 10,
   },
 });
+
+export default LoginScreen;
