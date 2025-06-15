@@ -11,7 +11,7 @@ type WelcomeScreenNavigationProp = NativeStackNavigationProp<
   AuthRootStackParamList,
   "Welcome"
 >;
-export function WelcomeScreen() {
+const WelcomeScreen = () => {
   const navigation = useNavigation<WelcomeScreenNavigationProp>();
   return (
     <ImageBackground
@@ -43,7 +43,7 @@ export function WelcomeScreen() {
       </SafeAreaView>
     </ImageBackground>
   );
-}
+};
 
 const styles = StyleSheet.create({
   imageBackground: {
@@ -67,3 +67,4 @@ const styles = StyleSheet.create({
     color: Colors.BEIGE_LIGHT,
   },
 });
+export default WelcomeScreen;

@@ -5,8 +5,6 @@ import Colors from "../utils/Colors";
 import { View, StyleSheet, FlatList } from "react-native";
 import { IconName } from "../types/IconName";
 import { ButtonComponent } from "../components/ButtonComponent";
-import { useNavigation } from "@react-navigation/native";
-import { ListingEditScreen } from "./ListingEditScreen";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { ProfileRootStackParamList } from "../types/NavigationTypes";
 import routes from "../components/navigators/routes";
@@ -31,13 +29,12 @@ type ProfileScreenNavigationProp = NativeStackNavigationProp<
   typeof routes.PROFILE,
   typeof routes.MESSAGES
 >;
-
-export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
+const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const menuItems: menuItem[] = [
     { icon: "format-list-bulleted", title: "My listings", targetScreen: "" },
     { icon: "email", title: "My messages", targetScreen: routes.MESSAGES },
   ];
-  // const navigation = useNavigation()
+
   return (
     <Screen>
       <View style={styles.listItem}>
@@ -90,3 +87,4 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
 });
+export default ProfileScreen;

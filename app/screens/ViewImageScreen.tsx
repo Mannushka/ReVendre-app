@@ -3,7 +3,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Colors from "../utils/Colors";
 import { Screen } from "../components/Screen";
 
-export default function ViewImageScreen() {
+const ViewImageScreen = () => {
   const image = {
     uri: "https://images.unsplash.com/photo-1467043237213-65f2da53396f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE3fHx8ZW58MHx8fHx8",
   };
@@ -28,7 +28,7 @@ export default function ViewImageScreen() {
       </View>
     </Screen>
   );
-}
+};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -65,3 +65,4 @@ const styles = StyleSheet.create({
     borderRadius: "2%",
   },
 });
+export default ViewImageScreen;
