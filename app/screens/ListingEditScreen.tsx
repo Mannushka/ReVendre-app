@@ -14,7 +14,7 @@ import { PageTitle } from "../components/PageTitle";
 import { FormImagePicker } from "../components/forms/FormImagePicker";
 import { useLocation } from "../hooks/useLocation";
 
-export const ListingEditScreen = () => {
+const ListingEditScreen = () => {
   const location = useLocation();
   const initialValues = {
     title: "",
@@ -23,6 +23,7 @@ export const ListingEditScreen = () => {
     description: "",
     images: [],
   };
+
   const validationSchema = yup.object().shape({
     title: yup.string().required().min(1).label("Title"),
     price: yup.number().required().min(1).max(10000).label("Price"),
@@ -76,3 +77,4 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
 });
+export default ListingEditScreen;
