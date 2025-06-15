@@ -1,7 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import Colors from "../../utils/Colors";
-import { ProfileScreen } from "../../screens";
-import { MessagesScreen } from "../../screens";
+import { ProfileScreen, MessagesScreen } from "../../screens";
 import { ProfileRootStackParamList } from "../../types/NavigationTypes";
 import routes from "./routes";
 

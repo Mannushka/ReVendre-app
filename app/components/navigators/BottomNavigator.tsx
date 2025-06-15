@@ -1,7 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MessagesScreen } from "../../screens/MessagesScreen";
-import { ProfileScreen } from "../../screens/ProfileScreen";
-import { ListingEditScreen } from "../../screens/ListingEditScreen";
+import { ListingEditScreen } from "../../screens";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { IconName } from "../../types/IconName";
 import Colors from "../../utils/Colors";

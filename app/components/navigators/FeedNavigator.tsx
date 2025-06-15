@@ -1,7 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import Colors from "../../utils/Colors";
-import ListingsScreen from "../../screens/ListingsScreen";
-import { ListingDetailsScreen } from "../../screens";
+import { ListingDetailsScreen, ListingsScreen } from "../../screens";
 import { Listing } from "../../types/Listing";
 import routes from "./routes";
 
