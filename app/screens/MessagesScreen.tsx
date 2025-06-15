@@ -22,9 +22,7 @@ type MessagesScreenNavigationProp = NativeStackNavigationProp<
   typeof routes.MESSAGES
 >;
 
-export const MessagesScreen: React.FC<MessagesScreenProps> = ({
-  navigation,
-}) => {
+const MessagesScreen: React.FC<MessagesScreenProps> = ({ navigation }) => {
   const profilePicture =
     "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
   const initialMessages = [
@@ -151,3 +149,5 @@ export const MessagesScreen: React.FC<MessagesScreenProps> = ({
 };
 
 const styles = StyleSheet.create({});
+
+export default MessagesScreen;
