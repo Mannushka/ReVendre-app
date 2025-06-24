@@ -33,6 +33,11 @@ export const BottomNavigator = () => {
         // },
         tabBarActiveTintColor: Colors.BUTTON_CORAL,
         tabBarInactiveTintColor: Colors.GRAY_MEDIUM,
+        tabBarStyle: {
+          backgroundColor: Colors.WHITE,
+          borderWidth: 0.2,
+          borderColor: Colors.GRAY_LIGHT300,
+        },
       })}
     >
       <Tab.Screen
