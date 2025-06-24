@@ -10,7 +10,6 @@ import * as yup from "yup";
 import Colors from "../utils/Colors";
 import categories from "../data/Categories";
 import { CategoryPickerItem } from "../components/CategoryPickerItem";
-import { PageTitle } from "../components/PageTitle";
 import { FormImagePicker } from "../components/forms/FormImagePicker";
 import { useLocation } from "../hooks/useLocation";
 
@@ -34,7 +33,6 @@ const ListingEditScreen = () => {
 
   return (
     <Screen>
-      <PageTitle titleString="Add a new listing" />
       <AppForm
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -75,6 +73,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "flex-start",
     paddingHorizontal: 20,
+    marginTop: 30,
   },
 });
 export default ListingEditScreen;
