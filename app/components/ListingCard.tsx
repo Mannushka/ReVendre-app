@@ -50,20 +50,20 @@ export const ListingCard: React.FC<ListingCardProps> = ({
 const styles = StyleSheet.create({
   card: {
     width: 350,
-    height: 300,
+    height: 280,
     backgroundColor: Colors.WHITE,
     justifyContent: "flex-start",
     alignItems: "center",
-    marginTop: 40,
+    marginTop: 20,
     borderRadius: 10,
-    borderWidth: 1,
-    borderColor: Colors.GRAY_LIGHT300,
+    // borderWidth: 0.2,
+    // borderColor: Colors.GRAY_LIGHT300,
     ...Platform.select({
       ios: {
-        shadowColor: "black",
+        shadowColor: Colors.GRAY_MEDIUM,
         shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.3,
-        shadowRadius: 3,
+        shadowOpacity: 0.2,
+        shadowRadius: 5,
       },
       android: {
         elevation: 5,
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 10,
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 16,
     fontFamily: "Helvetica-Bold",
     fontWeight: "500",
     marginHorizontal: 2,
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   subTitle: {
     marginTop: 10,
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 16,
     fontFamily: "Helvetica-Bold",
     fontWeight: "500",
     marginHorizontal: 5,
