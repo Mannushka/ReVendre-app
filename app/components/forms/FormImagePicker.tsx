@@ -4,6 +4,7 @@ import { ImageInputList } from "../inputs/ImageInputList";
 import * as ImagePicker from "expo-image-picker";
 import { useFormikContext, FormikTouched } from "formik";
 import { ErrorMessage } from "./ErrorMessage";
+
 interface FormImagePickerProps {
   fieldName: string;
 }
@@ -17,6 +18,11 @@ export const FormImagePicker: React.FC<FormImagePickerProps> = ({
 
   const addImage = async (): Promise<void> => {
     try {
+      const { status } = await ImagePicker.requestCameraPermissionsAsync();
+      if (status !== "granted") {
+        console.log("Camera permission not granted");
+        return;
+      }
       const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: "images",
         allowsMultipleSelection: true,
