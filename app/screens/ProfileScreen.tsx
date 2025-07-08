@@ -9,6 +9,8 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RouteProp } from "@react-navigation/native";
 import { ProfileRootStackParamList } from "../types/NavigationTypes";
 import routes from "../components/navigators/routes";
+import { useUser } from "@clerk/clerk-expo";
+import { useClerk } from "@clerk/clerk-expo";
 
 type menuItem = {
   icon: IconName;
@@ -37,6 +39,18 @@ type ProfileScreenNavigationProp = NativeStackNavigationProp<
   typeof routes.MESSAGES
 >;
 const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
+  const user = useUser();
+  const { signOut } = useClerk();
+  const username = user.user?.username ? user.user.username : "Anonymous user";
+  const userEmail = user.user ? user.user.emailAddresses : "No email";
+
+  const defaultAvatarUrl =
+    "https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg";
+
+  const profilePicture = user.user?.hasImage
+    ? user.user.imageUrl
+    : defaultAvatarUrl;
+
   const menuItems: menuItem[] = [
     {
       icon: "format-list-bulleted",
@@ -46,13 +60,25 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
     { icon: "email", title: "My messages", targetScreen: routes.MESSAGES },
   ];
 
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      // Redirect to your desired page
+      // Linking.openURL(Linking.createURL('/'))
+      console.log("logu out success");
+    } catch (err) {
+      // See https://clerk.com/docs/custom-flows/error-handling
+      // for more info on error handling
+      console.error(JSON.stringify(err, null, 2));
+    }
+  };
   return (
     <Screen>
       <View style={styles.listItem}>
         <ListItem
-          image="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          title="Luis"
-          subTitle="luis@gmail.com"
+          image={profilePicture}
+          title={username}
+          subTitle={userEmail.toString()}
         />
       </View>
       <View style={styles.flatList}>
@@ -71,11 +97,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
         />
       </View>
       <View>
-        <MenuItem
-          title="Log out"
-          icon="logout"
-          onPress={() => console.log("log out pressed")}
-        />
+        <MenuItem title="Log out" icon="logout" onPress={handleSignOut} />
       </View>
       {/* <ButtonComponent
         title="New listing"
