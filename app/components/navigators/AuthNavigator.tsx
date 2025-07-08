@@ -1,6 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import { AuthRootStackParamList } from "../../types/NavigationTypes";
 import { WelcomeScreen, LoginScreen, RegisterScreen } from "../../screens";
+import { BottomNavigator } from "./BottomNavigator";
 
 export const AuthNavigator = () => {
   const RootStack = createStackNavigator<AuthRootStackParamList>();
@@ -9,6 +10,7 @@ export const AuthNavigator = () => {
       <RootStack.Screen name="Welcome" component={WelcomeScreen} />
       <RootStack.Screen name="Login" component={LoginScreen} />
       <RootStack.Screen name="Register" component={RegisterScreen} />
+      <RootStack.Screen name="Main" component={BottomNavigator} />
     </RootStack.Navigator>
   );
 };
