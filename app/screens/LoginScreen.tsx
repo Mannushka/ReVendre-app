@@ -5,15 +5,24 @@ import * as yup from "yup";
 import { AppForm, AppFormField, SubmitButton } from "../components/forms";
 import { PageTitle } from "../components/PageTitle";
 import { useSignIn } from "@clerk/clerk-expo";
+import { useUser } from "@clerk/clerk-expo";
 import { ErrorMessage } from "../components/forms";
-
+import { useNavigation } from "@react-navigation/native";
+import { useEffect } from "react";
 const LoginScreen = () => {
   const validationSchema = yup.object().shape({
     email: yup.string().required().email().label("Email"),
     password: yup.string().required().min(8).label("Password"),
   });
-
+  const { isSignedIn } = useUser();
   const { isLoaded, signIn, setActive } = useSignIn();
+  const navigation = useNavigation();
+
+  // useEffect(() => {
+  //   if (isSignedIn) {
+  //     navigation.reset({ index: 0, routes: [{ name: "Main" as never }] });
+  //   }
+  // }, [isSignedIn]);
 
   const handleSignIn = async (email: string, password: string) => {
     if (!isLoaded) return;
@@ -25,16 +34,13 @@ const LoginScreen = () => {
         password: password,
       });
 
-      // Immediately set the session as active without verification
-      // await setActive(); // Assuming this function sets the session as active
-
-      // // Redirect the user to the desired location
-      // router.replace("/");
       console.log("sign in status", signIn.status);
 
       if (signIn.status === "complete") {
         console.log("User logged in");
+        navigation.reset({ index: 0, routes: [{ name: "Main" as never }] });
       }
+      console.log("hello");
     } catch (err) {
       console.error(JSON.stringify(err, null, 2));
     }
