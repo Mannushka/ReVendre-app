@@ -5,6 +5,15 @@ import * as yup from "yup";
 import Colors from "../utils/Colors";
 import { PageTitle } from "../components/PageTitle";
 import { useSignUp } from "@clerk/clerk-expo";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { AuthRootStackParamList } from "../types/NavigationTypes";
+import { useNavigation } from "@react-navigation/native";
+import { FormikValues } from "formik";
+
+type RegisterScreenNavigationProp = NativeStackNavigationProp<
+  AuthRootStackParamList,
+  "Main"
+>;
 
 const RegisterScreen = () => {
   const validationSchema = yup.object().shape({
@@ -14,6 +23,8 @@ const RegisterScreen = () => {
   });
 
   const { isLoaded, signUp, setActive } = useSignUp();
+
+  const navigation = useNavigation<RegisterScreenNavigationProp>();
 
   const handleSignUp = async (
     username: string,
@@ -34,9 +45,12 @@ const RegisterScreen = () => {
 
       // // Redirect the user to the desired location
       // router.replace("/");
-      console.log("sign up status", signUp.status);
 
-      if (signUp.status === "complete") console.log("User registered");
+      if (signUp.status === "complete") {
+        console.log("User registered");
+        setActive({ session: signUp.createdSessionId });
+        navigation.reset({ index: 0, routes: [{ name: "Main" as never }] });
+      }
     } catch (err) {
       console.error(JSON.stringify(err, null, 2));
     }
@@ -47,11 +61,9 @@ const RegisterScreen = () => {
       <AppForm
         initialValues={{ username: "", email: "", password: "" }}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
+        onSubmit={(values: FormikValues) => {
           const { username, email, password } = values;
-          console.log(email);
           handleSignUp(username, email, password);
-          console.log("hello");
         }}
       >
         <View style={styles.container}>
