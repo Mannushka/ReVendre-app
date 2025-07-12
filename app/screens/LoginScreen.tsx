@@ -5,24 +5,16 @@ import * as yup from "yup";
 import { AppForm, AppFormField, SubmitButton } from "../components/forms";
 import { PageTitle } from "../components/PageTitle";
 import { useSignIn } from "@clerk/clerk-expo";
-import { useUser } from "@clerk/clerk-expo";
-import { ErrorMessage } from "../components/forms";
 import { useNavigation } from "@react-navigation/native";
-import { useEffect } from "react";
+import { FormikValues } from "formik";
 const LoginScreen = () => {
   const validationSchema = yup.object().shape({
     email: yup.string().required().email().label("Email"),
     password: yup.string().required().min(8).label("Password"),
   });
-  const { isSignedIn } = useUser();
+
   const { isLoaded, signIn, setActive } = useSignIn();
   const navigation = useNavigation();
-
-  // useEffect(() => {
-  //   if (isSignedIn) {
-  //     navigation.reset({ index: 0, routes: [{ name: "Main" as never }] });
-  //   }
-  // }, [isSignedIn]);
 
   const handleSignIn = async (email: string, password: string) => {
     if (!isLoaded) return;
@@ -38,9 +30,9 @@ const LoginScreen = () => {
 
       if (signIn.status === "complete") {
         console.log("User logged in");
+        setActive({ session: signIn.createdSessionId });
         navigation.reset({ index: 0, routes: [{ name: "Main" as never }] });
       }
-      console.log("hello");
     } catch (err) {
       console.error(JSON.stringify(err, null, 2));
     }
@@ -59,7 +51,7 @@ const LoginScreen = () => {
       <AppForm
         initialValues={{ email: "", password: "" }}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
+        onSubmit={(values: FormikValues) => {
           const { email, password } = values;
           handleSignIn(email, password);
         }}
