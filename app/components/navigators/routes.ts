@@ -3,4 +3,5 @@ export default Object.freeze({
   LISTING_DETAILS: "ListingDetailsScreen",
   MESSAGES: "MessagesScreen",
   PROFILE: "ProfileScreen",
+  WELCOME_SCREEN: "WelcomeScreen",
 });
