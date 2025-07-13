@@ -10,4 +10,5 @@ export type AuthRootStackParamList = {
 export type ProfileRootStackParamList = {
   ProfileScreen: undefined;
   MessagesScreen: undefined;
+  WelcomeScreen: undefined;
 };
