@@ -4,7 +4,6 @@ import { Screen } from "../components/Screen";
 import Colors from "../utils/Colors";
 import { View, StyleSheet, FlatList } from "react-native";
 import { IconName } from "../types/IconName";
-import { ButtonComponent } from "../components/ButtonComponent";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RouteProp } from "@react-navigation/native";
 import { ProfileRootStackParamList } from "../types/NavigationTypes";
@@ -28,19 +27,15 @@ interface ProfileScreenProps {
   route: ProfileScreenRouteProp;
 }
 
-// type RootStackParamList = {
-//   Profile: undefined; // No params expected for ProfileScreen
-//   "New listing": undefined; // No params expected for ListingEditScreen
-// };
-
 type ProfileScreenNavigationProp = NativeStackNavigationProp<
   ProfileRootStackParamList,
   typeof routes.PROFILE,
   typeof routes.MESSAGES
 >;
 const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
-  const user = useUser();
   const { signOut } = useClerk();
+  const user = useUser();
+  console.log("user is signd in: ", user.isSignedIn);
   const username = user.user?.username ? user.user.username : "Anonymous user";
   const userEmail = user.user ? user.user.emailAddresses : "No email";
 
@@ -63,9 +58,11 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const handleSignOut = async () => {
     try {
       await signOut();
+
       // Redirect to your desired page
       // Linking.openURL(Linking.createURL('/'))
-      console.log("logu out success");
+      console.log("log out success");
+      navigation.reset({ index: 0, routes: [{ name: routes.WELCOME_SCREEN }] });
     } catch (err) {
       // See https://clerk.com/docs/custom-flows/error-handling
       // for more info on error handling
@@ -99,10 +96,6 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
       <View>
         <MenuItem title="Log out" icon="logout" onPress={handleSignOut} />
       </View>
-      {/* <ButtonComponent
-        title="New listing"
-        onPress={() => navigation.navigate("New listing")}
-      ></ButtonComponent> */}
     </Screen>
   );
 };
