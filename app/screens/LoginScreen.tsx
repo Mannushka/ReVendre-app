@@ -7,12 +7,15 @@ import { PageTitle } from "../components/PageTitle";
 import { useSignIn } from "@clerk/clerk-expo";
 import { useNavigation } from "@react-navigation/native";
 import { FormikValues } from "formik";
+import ActivityIndicator from "../components/ActivityIndicator";
+import { useState } from "react";
+
 const LoginScreen = () => {
   const validationSchema = yup.object().shape({
     email: yup.string().required().email().label("Email"),
     password: yup.string().required().min(8).label("Password"),
   });
-
+  const [loading, setLoading] = useState<boolean>(false);
   const { isLoaded, signIn, setActive } = useSignIn();
   const navigation = useNavigation();
 
@@ -20,6 +23,7 @@ const LoginScreen = () => {
     if (!isLoaded) return;
     // if (!email || !password)
     //   return <ErrorMessage error="Please fill out the log in form" />;
+    setLoading(true);
     try {
       await signIn.create({
         identifier: email,
@@ -32,6 +36,7 @@ const LoginScreen = () => {
         console.log("User logged in");
         setActive({ session: signIn.createdSessionId });
         navigation.reset({ index: 0, routes: [{ name: "Main" as never }] });
+        setLoading(false);
       }
     } catch (err) {
       console.error(JSON.stringify(err, null, 2));
@@ -47,7 +52,7 @@ const LoginScreen = () => {
       >
         {() => (
           <View style={styles.container}> */}
-
+      {loading && <ActivityIndicator isVisible={true} />}
       <AppForm
         initialValues={{ email: "", password: "" }}
         validationSchema={validationSchema}
