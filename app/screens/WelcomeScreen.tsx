@@ -6,11 +6,13 @@ import { Logo } from "../components/Logo";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { AuthRootStackParamList } from "../types/NavigationTypes";
 import { useNavigation } from "@react-navigation/native";
+import routes from "../components/navigators/routes";
 
 type WelcomeScreenNavigationProp = NativeStackNavigationProp<
   AuthRootStackParamList,
   "Welcome"
 >;
+
 const WelcomeScreen = () => {
   const navigation = useNavigation<WelcomeScreenNavigationProp>();
   return (
