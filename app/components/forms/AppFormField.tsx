@@ -40,7 +40,10 @@ export const AppFormField: React.FC<AppFormFieldProps> = ({
         inputFieldWidth={inputFieldWidth}
         onBlur={() => {
           setFieldTouched(fieldName),
-            console.log(touched[fieldName as keyof FormikTouched<unknown>]);
+            console.log(
+              "field touched",
+              touched[fieldName as keyof FormikTouched<unknown>]
+            );
         }}
         onChangeText={handleChange(fieldName)}
       />
