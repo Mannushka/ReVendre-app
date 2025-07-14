@@ -8,39 +8,38 @@ import { useSignIn } from "@clerk/clerk-expo";
 import { useNavigation } from "@react-navigation/native";
 import { FormikValues } from "formik";
 import ActivityIndicator from "../components/ActivityIndicator";
-import { useState } from "react";
+import useLoadingState from "../hooks/useLoadingState";
 
 const LoginScreen = () => {
   const validationSchema = yup.object().shape({
     email: yup.string().required().email().label("Email"),
     password: yup.string().required().min(8).label("Password"),
   });
-  const [loading, setLoading] = useState<boolean>(false);
+
+  const { loading, performActionWithLoading } = useLoadingState();
   const { isLoaded, signIn, setActive } = useSignIn();
   const navigation = useNavigation();
-
+  console.log("loading 1 is", loading);
   const handleSignIn = async (email: string, password: string) => {
     if (!isLoaded) return;
     // if (!email || !password)
     //   return <ErrorMessage error="Please fill out the log in form" />;
-    setLoading(true);
-    try {
-      await signIn.create({
-        identifier: email,
-        password: password,
-      });
+    // setLoading(true);
+    performActionWithLoading(async () => {
+      try {
+        await signIn.create({
+          identifier: email,
+          password: password,
+        });
 
-      console.log("sign in status", signIn.status);
-
-      if (signIn.status === "complete") {
-        console.log("User logged in");
-        setActive({ session: signIn.createdSessionId });
-        navigation.reset({ index: 0, routes: [{ name: "Main" as never }] });
-        setLoading(false);
+        if (signIn.status === "complete") {
+          setActive({ session: signIn.createdSessionId });
+          navigation.reset({ index: 0, routes: [{ name: "Main" as never }] });
+        }
+      } catch (err) {
+        console.error(JSON.stringify(err, null, 2));
       }
-    } catch (err) {
-      console.error(JSON.stringify(err, null, 2));
-    }
+    });
   };
   return (
     <Screen>
@@ -122,7 +121,6 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    // marginTop: 10,
   },
 });
 
