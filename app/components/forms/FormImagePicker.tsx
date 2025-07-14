@@ -29,7 +29,7 @@ export const FormImagePicker: React.FC<FormImagePickerProps> = ({
         aspect: [5, 4],
       });
 
-      console.log(result);
+      console.log("images uploaded", result);
 
       if (!result.canceled) {
         const selectedImages = result.assets;
