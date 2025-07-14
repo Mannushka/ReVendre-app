@@ -1,5 +1,3 @@
-import { number } from "yup";
-
 export type AuthRootStackParamList = {
   Welcome: undefined;
   Login: undefined;
