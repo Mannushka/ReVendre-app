@@ -1,6 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import Colors from "../../utils/Colors";
-import { ProfileScreen, MessagesScreen } from "../../screens";
+import { ProfileScreen, MessagesScreen, WelcomeScreen } from "../../screens";
 import { ProfileRootStackParamList } from "../../types/NavigationTypes";
 import routes from "./routes";
 
@@ -15,6 +15,7 @@ const ProfileNavigator = () => {
     >
       <RootStack.Screen name={routes.PROFILE} component={ProfileScreen} />
       <RootStack.Screen name={routes.MESSAGES} component={MessagesScreen} />
+      <RootStack.Screen name={"WelcomeScreen"} component={WelcomeScreen} />
     </RootStack.Navigator>
   );
 };
