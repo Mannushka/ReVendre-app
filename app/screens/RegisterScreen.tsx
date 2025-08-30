@@ -9,9 +9,12 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { AuthRootStackParamList } from "../types/NavigationTypes";
 import { useNavigation } from "@react-navigation/native";
 import { FormikValues } from "formik";
-
 import useLoadingState from "../hooks/useLoadingState";
 import ActivityIndicator from "../components/ActivityIndicator";
+
+import axios from "axios";
+import { BACKEND_URL } from "../components/constants";
+import { useAuth } from "@clerk/clerk-expo";
 
 type RegisterScreenNavigationProp = NativeStackNavigationProp<
   AuthRootStackParamList,
@@ -29,6 +32,34 @@ const RegisterScreen = () => {
 
   const navigation = useNavigation<RegisterScreenNavigationProp>();
   console.log("loading is", loading);
+
+  const { getToken } = useAuth();
+
+  const addNewUserToDB = async (username: string, emailAddress: string) => {
+    const token = await getToken();
+    console.log("Token from Clerk:", token);
+
+    try {
+      const response = await axios.post(
+        `${BACKEND_URL}/users`,
+        {
+          userName: username,
+          email: emailAddress,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("data: ", response.data);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+
+    console.log("Added user to DB");
+  };
+
   const handleSignUp = async (
     username: string,
     emailAddress: string,
@@ -44,19 +75,26 @@ const RegisterScreen = () => {
           password,
         });
 
-        // Immediately set the session as active without verification
-        // await setActive(); // Assuming this function sets the session as active
-
-        // // Redirect the user to the desired location
-        // router.replace("/");
-
         if (signUp.status === "complete") {
           console.log("User registered");
-          setActive({ session: signUp.createdSessionId });
+
+          await setActive({ session: signUp.createdSessionId });
+          try {
+            await addNewUserToDB(username, emailAddress);
+          } catch (dbError) {
+            // Rollback Clerk user if DB fails
+            // await clerkClient.users.deleteUser(signUp.createdUserId!);
+
+            console.error("DB insert failed:", dbError); // log real error
+            throw dbError; // rethrow original error
+          }
           navigation.reset({ index: 0, routes: [{ name: "Main" as never }] });
         }
-      } catch (err) {
-        console.error(JSON.stringify(err, null, 2));
+      } catch (err: any) {
+        console.log("SignUp error:", err);
+        if (err.errors) {
+          console.log("Clerk errors:", err.errors);
+        }
       }
     });
   };
