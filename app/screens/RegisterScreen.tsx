@@ -14,7 +14,7 @@ import ActivityIndicator from "../components/ActivityIndicator";
 
 import axios from "axios";
 import { BACKEND_URL } from "../components/constants";
-import { useAuth } from "@clerk/clerk-expo";
+import { useAuth, useClerk } from "@clerk/clerk-expo";
 
 type RegisterScreenNavigationProp = NativeStackNavigationProp<
   AuthRootStackParamList,
@@ -29,15 +29,16 @@ const RegisterScreen = () => {
   });
   const { loading, performActionWithLoading } = useLoadingState();
   const { isLoaded, signUp, setActive } = useSignUp();
+  const { signOut } = useClerk();
 
   const navigation = useNavigation<RegisterScreenNavigationProp>();
   console.log("loading is", loading);
 
   const { getToken } = useAuth();
+  const dummyToken = "123";
 
   const addNewUserToDB = async (username: string, emailAddress: string) => {
-    const token = await getToken();
-    console.log("Token from Clerk:", token);
+    // const token = await getToken();
 
     try {
       const response = await axios.post(
@@ -48,16 +49,16 @@ const RegisterScreen = () => {
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${dummyToken}`,
           },
         }
       );
       console.log("data: ", response.data);
+      console.log("Added user to DB");
     } catch (error) {
       console.log("error: ", error);
+      throw error;
     }
-
-    console.log("Added user to DB");
   };
 
   const handleSignUp = async (
@@ -68,6 +69,8 @@ const RegisterScreen = () => {
     if (!isLoaded) return;
 
     performActionWithLoading(async () => {
+      let isSignUpSuccessfull = false;
+      //register user with clerk
       try {
         await signUp.create({
           username,
@@ -76,19 +79,36 @@ const RegisterScreen = () => {
         });
 
         if (signUp.status === "complete") {
-          console.log("User registered");
+          console.log("User registered with Clerk:", signUp);
 
-          await setActive({ session: signUp.createdSessionId });
+          //add user to db
           try {
             await addNewUserToDB(username, emailAddress);
+            isSignUpSuccessfull = true;
+            await setActive({ session: signUp.createdSessionId });
           } catch (dbError) {
-            // Rollback Clerk user if DB fails
-            // await clerkClient.users.deleteUser(signUp.createdUserId!);
+            // rollback Clerk user if DB fails
+            try {
+              const realToken = await getToken();
+              const response = await axios.delete(
+                `${BACKEND_URL}/users/rollback-user/${signUp.createdUserId}`,
+                {
+                  headers: {
+                    Authorization: `Bearer ${realToken}`,
+                  },
+                }
+              );
 
+              console.log("Rollback response: ", response.data);
+            } catch (error) {
+              console.log("Rollback error: ", error);
+            }
             console.error("DB insert failed:", dbError); // log real error
             throw dbError; // rethrow original error
           }
-          navigation.reset({ index: 0, routes: [{ name: "Main" as never }] });
+          //navigate to main screen if both  signup and db insert successful
+          if (isSignUpSuccessfull)
+            navigation.reset({ index: 0, routes: [{ name: "Main" as never }] });
         }
       } catch (err: any) {
         console.log("SignUp error:", err);
@@ -98,6 +118,7 @@ const RegisterScreen = () => {
       }
     });
   };
+
   return (
     <Screen>
       <PageTitle titleString="Let's create you an account!" />
