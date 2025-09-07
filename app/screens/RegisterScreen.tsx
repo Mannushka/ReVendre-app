@@ -39,7 +39,7 @@ const RegisterScreen = () => {
   const addNewUserToDB = async (
     username: string,
     emailAddress: string,
-    token: string | null
+    token: string
   ) => {
     try {
       const response = await axios.post(
@@ -79,54 +79,61 @@ const RegisterScreen = () => {
     }
   };
 
-  const handleSignUp = async (
+  const createNewUser = async (
     username: string,
     emailAddress: string,
     password: string
   ) => {
     if (!isLoaded) return;
 
-    performActionWithLoading(async () => {
-      //register user with clerk
+    //register user with clerk
+    await signUp.create({
+      username,
+      emailAddress,
+      password,
+    });
+
+    if (signUp.status === "complete") {
+      console.log("User registered with Clerk:", signUp);
+      await setActive({ session: signUp.createdSessionId });
+      const clerkUserId = signUp.createdUserId;
+      const token = await getToken();
+      const dummyToken = "dummyToken";
+      console.log("token", token);
+
+      //add user to db
       try {
-        await signUp.create({
-          username,
-          emailAddress,
-          password,
-        });
-
-        if (signUp.status === "complete") {
-          console.log("User registered with Clerk:", signUp);
-          await setActive({ session: signUp.createdSessionId });
-          const token = await getToken();
-          const dummyToken = "dummyToken";
-          console.log("token", token);
-
-          //add user to db
-          try {
-            await addNewUserToDB(username, emailAddress, dummyToken);
-          } catch (dbError) {
-            // rollback Clerk user if DB fails
-            const clerkUserId = signUp.createdUserId;
-            if (clerkUserId && token)
-              await rollBackClerkUser(clerkUserId, token);
-
-            console.error("DB insert failed:", dbError); // log real error
-            setErrorMessage("Registration failed. Please try again.");
-            throw dbError; // rethrow original error
-          }
-
-          //navigate to main screen if both  signup and db insert successful
-
-          navigation.reset({ index: 0, routes: [{ name: "Main" as never }] });
+        if (token) await addNewUserToDB(username, emailAddress, token);
+      } catch (dbError) {
+        // rollback Clerk user if DB fails
+        if (clerkUserId && token) {
+          await rollBackClerkUser(clerkUserId, token);
         }
-      } catch (err: any) {
-        console.log("SignUp error:", err);
+        await signOut();
+        console.error("DB insert failed:", dbError); // log real error
+        throw dbError; // rethrow original error
+      }
+    }
+  };
 
-        if (err.errors) {
-          console.log("Clerk errors:", err.errors);
-          console.log("First error longMessage:", err.errors[0]?.longMessage);
-          setErrorMessage(err.errors[0]?.longMessage);
+  const handleSignUp = async (
+    username: string,
+    emailAddress: string,
+    password: string
+  ) => {
+    performActionWithLoading(async () => {
+      try {
+        await createNewUser(username, emailAddress, password);
+        navigation.reset({ index: 0, routes: [{ name: "Main" as never }] });
+      } catch (err: any) {
+        console.error("Error during user creation:", err);
+
+        // Clerk error response
+        if (err?.errors && Array.isArray(err.errors)) {
+          setErrorMessage(err.errors[0]?.longMessage ?? "Registration failed");
+        } else {
+          // generic fallback
+          setErrorMessage("Registration failed. Please try again.");
         }
       }
     });
@@ -193,3 +200,45 @@ const styles = StyleSheet.create({
 export default RegisterScreen;
 //add email verification
 //add log out button
+
+// performActionWithLoading(async () => {
+//   //register user with clerk
+//   try {
+//     await signUp.create({
+//       username,
+//       emailAddress,
+//       password,
+//     });
+
+//     if (signUp.status === "complete") {
+//       console.log("User registered with Clerk:", signUp);
+//       await setActive({ session: signUp.createdSessionId });
+//       const token = await getToken();
+//       const dummyToken = "dummyToken";
+//       console.log("token", token);
+
+//       //add user to db
+//       try {
+//         await addNewUserToDB(username, emailAddress, dummyToken);
+//       } catch (dbError) {
+//         // rollback Clerk user if DB fails
+//         const clerkUserId = signUp.createdUserId;
+//         if (clerkUserId && token)
+//           await rollBackClerkUser(clerkUserId, token);
+
+//         console.error("DB insert failed:", dbError); // log real error
+//         setErrorMessage("Registration failed. Please try again.");
+//         throw dbError; // rethrow original error
+//       }
+//     }
+//   } catch (err: any) {
+//     console.log("SignUp error:", err);
+
+//     if (err.errors) {
+//       console.log("Clerk errors:", err.errors);
+//       console.log("First error longMessage:", err.errors[0]?.longMessage);
+//       setErrorMessage(err.errors[0]?.longMessage);
+//     }
+//   }
+// });
+//navigate to main screen if both  signup and db insert successful
