@@ -107,8 +107,9 @@ const RegisterScreen = () => {
             await addNewUserToDB(username, emailAddress, dummyToken);
           } catch (dbError) {
             // rollback Clerk user if DB fails
-            if (signUp.createdUserId && token)
-              await rollBackClerkUser(signUp.createdUserId, token);
+            const clerkUserId = signUp.createdUserId;
+            if (clerkUserId && token)
+              await rollBackClerkUser(clerkUserId, token);
 
             console.error("DB insert failed:", dbError); // log real error
             setErrorMessage("Registration failed. Please try again.");
