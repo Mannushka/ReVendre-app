@@ -1,10 +1,12 @@
 import { View, StyleSheet } from "react-native";
+import React, { useState } from "react";
 import { Screen } from "../components/Screen";
 import { AppForm, AppFormField, SubmitButton } from "../components/forms";
+import { ErrorMessage } from "../components/forms";
 import * as yup from "yup";
 import Colors from "../utils/Colors";
 import { PageTitle } from "../components/PageTitle";
-import { useSignUp } from "@clerk/clerk-expo";
+import { useSignUp, useAuth } from "@clerk/clerk-expo";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { AuthRootStackParamList } from "../types/NavigationTypes";
 import { useNavigation } from "@react-navigation/native";
@@ -14,7 +16,6 @@ import ActivityIndicator from "../components/ActivityIndicator";
 
 import axios from "axios";
 import { BACKEND_URL } from "../components/constants";
-import { useAuth, useClerk } from "@clerk/clerk-expo";
 
 type RegisterScreenNavigationProp = NativeStackNavigationProp<
   AuthRootStackParamList,
@@ -29,17 +30,17 @@ const RegisterScreen = () => {
   });
   const { loading, performActionWithLoading } = useLoadingState();
   const { isLoaded, signUp, setActive } = useSignUp();
-  const { signOut } = useClerk();
-
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const navigation = useNavigation<RegisterScreenNavigationProp>();
   console.log("loading is", loading);
 
-  const { getToken } = useAuth();
-  const dummyToken = "123";
+  const { getToken, signOut } = useAuth();
 
-  const addNewUserToDB = async (username: string, emailAddress: string) => {
-    // const token = await getToken();
-
+  const addNewUserToDB = async (
+    username: string,
+    emailAddress: string,
+    token: string | null
+  ) => {
     try {
       const response = await axios.post(
         `${BACKEND_URL}/users`,
@@ -49,7 +50,7 @@ const RegisterScreen = () => {
         },
         {
           headers: {
-            Authorization: `Bearer ${dummyToken}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -61,6 +62,23 @@ const RegisterScreen = () => {
     }
   };
 
+  const rollBackClerkUser = async (userId: string, token: string) => {
+    try {
+      const response = await axios.delete(
+        `${BACKEND_URL}/users/rollback-user/${userId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log("Rollback response: ", response.data);
+    } catch (error) {
+      console.log("Rollback error: ", error);
+    }
+  };
+
   const handleSignUp = async (
     username: string,
     emailAddress: string,
@@ -69,7 +87,6 @@ const RegisterScreen = () => {
     if (!isLoaded) return;
 
     performActionWithLoading(async () => {
-      let isSignUpSuccessfull = false;
       //register user with clerk
       try {
         await signUp.create({
@@ -80,40 +97,35 @@ const RegisterScreen = () => {
 
         if (signUp.status === "complete") {
           console.log("User registered with Clerk:", signUp);
+          await setActive({ session: signUp.createdSessionId });
+          const token = await getToken();
+          const dummyToken = "dummyToken";
+          console.log("token", token);
 
           //add user to db
           try {
-            await addNewUserToDB(username, emailAddress);
-            isSignUpSuccessfull = true;
-            await setActive({ session: signUp.createdSessionId });
+            await addNewUserToDB(username, emailAddress, dummyToken);
           } catch (dbError) {
             // rollback Clerk user if DB fails
-            try {
-              const realToken = await getToken();
-              const response = await axios.delete(
-                `${BACKEND_URL}/users/rollback-user/${signUp.createdUserId}`,
-                {
-                  headers: {
-                    Authorization: `Bearer ${realToken}`,
-                  },
-                }
-              );
+            if (signUp.createdUserId && token)
+              await rollBackClerkUser(signUp.createdUserId, token);
 
-              console.log("Rollback response: ", response.data);
-            } catch (error) {
-              console.log("Rollback error: ", error);
-            }
             console.error("DB insert failed:", dbError); // log real error
+            setErrorMessage("Registration failed. Please try again.");
             throw dbError; // rethrow original error
           }
+
           //navigate to main screen if both  signup and db insert successful
-          if (isSignUpSuccessfull)
-            navigation.reset({ index: 0, routes: [{ name: "Main" as never }] });
+
+          navigation.reset({ index: 0, routes: [{ name: "Main" as never }] });
         }
       } catch (err: any) {
         console.log("SignUp error:", err);
+
         if (err.errors) {
           console.log("Clerk errors:", err.errors);
+          console.log("First error longMessage:", err.errors[0]?.longMessage);
+          setErrorMessage(err.errors[0]?.longMessage);
         }
       }
     });
@@ -158,6 +170,7 @@ const RegisterScreen = () => {
             placeholder="Password"
             textContentType="password"
           ></AppFormField>
+          {errorMessage && <ErrorMessage error={errorMessage} />}
           <SubmitButton
             title="Register"
             color={Colors.WHITE}
