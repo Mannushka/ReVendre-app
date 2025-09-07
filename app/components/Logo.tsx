@@ -8,7 +8,6 @@ export const Logo = () => {
         source={require("../assets/revendre-logo.png")}
         style={styles.image}
       ></Image>
-      ;
     </View>
   );
 };
