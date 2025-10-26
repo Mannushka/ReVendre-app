@@ -9,6 +9,8 @@ import { useNavigation } from "@react-navigation/native";
 import { FormikValues } from "formik";
 import ActivityIndicator from "../components/ActivityIndicator";
 import useLoadingState from "../hooks/useLoadingState";
+import axios from "axios";
+import { BACKEND_URL } from "@env";
 
 const LoginScreen = () => {
   const validationSchema = yup.object().shape({
@@ -20,6 +22,16 @@ const LoginScreen = () => {
   const { isLoaded, signIn, setActive } = useSignIn();
   const navigation = useNavigation();
   console.log("loading 1 is", loading);
+
+  const fetchUsers = async () => {
+    try {
+      const response = await axios.get(`${BACKEND_URL}/users`);
+      console.log("data: ", response.data);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
+
   const handleSignIn = async (email: string, password: string) => {
     if (!isLoaded) return;
     // if (!email || !password)
@@ -34,11 +46,14 @@ const LoginScreen = () => {
 
         if (signIn.status === "complete") {
           setActive({ session: signIn.createdSessionId });
+
           navigation.reset({ index: 0, routes: [{ name: "Main" as never }] });
         }
       } catch (err) {
         console.error(JSON.stringify(err, null, 2));
       }
+
+      await fetchUsers();
     });
   };
   return (
