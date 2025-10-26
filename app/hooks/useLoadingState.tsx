@@ -11,6 +11,7 @@ function useLoadingState() {
       await action();
     } catch (error) {
       console.log(error);
+      setLoading(false);
     } finally {
       setLoading(false);
     }
