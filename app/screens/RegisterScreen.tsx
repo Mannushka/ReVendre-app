@@ -15,7 +15,7 @@ import useLoadingState from "../hooks/useLoadingState";
 import ActivityIndicator from "../components/ActivityIndicator";
 
 import axios from "axios";
-import { BACKEND_URL } from "../components/constants";
+import { BACKEND_URL } from "@env";
 
 type RegisterScreenNavigationProp = NativeStackNavigationProp<
   AuthRootStackParamList,
