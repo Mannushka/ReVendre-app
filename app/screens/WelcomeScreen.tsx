@@ -6,7 +6,9 @@ import { Logo } from "../components/Logo";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { AuthRootStackParamList } from "../types/NavigationTypes";
 import { useNavigation } from "@react-navigation/native";
+import { useUser } from "@clerk/clerk-expo";
 import routes from "../components/navigators/routes";
+import { useEffect, useRef } from "react";
 
 type WelcomeScreenNavigationProp = NativeStackNavigationProp<
   AuthRootStackParamList,
@@ -15,6 +17,18 @@ type WelcomeScreenNavigationProp = NativeStackNavigationProp<
 
 const WelcomeScreen = () => {
   const navigation = useNavigation<WelcomeScreenNavigationProp>();
+  const { user, isLoaded } = useUser();
+  const didNavigateRef = useRef(false);
+
+  useEffect(() => {
+    if (!isLoaded) return;
+
+    if (user && !didNavigateRef.current) {
+      console.log("user is logged in: ", user);
+      didNavigateRef.current = true;
+      navigation.reset({ index: 0, routes: [{ name: "Main" as never }] });
+    }
+  }, [user, isLoaded, navigation]);
   return (
     <ImageBackground
       source={require("../assets/welcome-screen-bg-img.avif")}
