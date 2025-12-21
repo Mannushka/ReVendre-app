@@ -4,7 +4,7 @@ import Colors from "../utils/Colors";
 import * as yup from "yup";
 import { AppForm, AppFormField, SubmitButton } from "../components/forms";
 import { PageTitle } from "../components/PageTitle";
-import { useSignIn } from "@clerk/clerk-expo";
+import { useSignIn, useUser } from "@clerk/clerk-expo";
 import { useNavigation } from "@react-navigation/native";
 import { FormikValues } from "formik";
 import ActivityIndicator from "../components/ActivityIndicator";
@@ -20,17 +20,18 @@ const LoginScreen = () => {
 
   const { loading, performActionWithLoading } = useLoadingState();
   const { isLoaded, signIn, setActive } = useSignIn();
+  const { user } = useUser();
   const navigation = useNavigation();
   console.log("loading 1 is", loading);
 
-  const fetchUsers = async () => {
-    try {
-      const response = await axios.get(`${BACKEND_URL}/users`);
-      console.log("data: ", response.data);
-    } catch (error) {
-      console.log("error: ", error);
-    }
-  };
+  // const fetchUsers = async () => {
+  //   try {
+  //     const response = await axios.get(`${BACKEND_URL}/users`);
+  //     console.log("data: ", response.data);
+  //   } catch (error) {
+  //     console.log("error: ", error);
+  //   }
+  // };
 
   const handleSignIn = async (email: string, password: string) => {
     if (!isLoaded) return;
@@ -52,8 +53,7 @@ const LoginScreen = () => {
       } catch (err) {
         console.error(JSON.stringify(err, null, 2));
       }
-
-      await fetchUsers();
+      console.log("user after sign in: ", user);
     });
   };
   return (
