@@ -50,7 +50,7 @@ export const AppPicker: React.FC<AppPickerProps> = ({
           )}
 
           {selectedItem ? (
-            <Text style={styles.text}>{selectedItem.label}</Text>
+            <Text style={styles.text}>{selectedItem.title}</Text>
           ) : (
             <Text style={styles.placeholder}>{placeholder}</Text>
           )}
@@ -64,7 +64,7 @@ export const AppPicker: React.FC<AppPickerProps> = ({
             <FlatList
               contentContainerStyle={styles.grid}
               data={items}
-              keyExtractor={(item) => item.value.toString()}
+              keyExtractor={(item) => item.id}
               renderItem={({ item }) => (
                 <PickerItemComponent
                   item={item}
