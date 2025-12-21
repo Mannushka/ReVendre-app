@@ -8,17 +8,22 @@ import { AppFormPicker as Picker } from "../components/forms/AppFormPicker";
 import { View, StyleSheet } from "react-native";
 import * as yup from "yup";
 import Colors from "../utils/Colors";
-import categories from "../data/Categories";
+// import categories from "../data/Categories";
 import { CategoryPickerItem } from "../components/CategoryPickerItem";
 import { FormImagePicker } from "../components/forms/FormImagePicker";
 import { useLocation } from "../hooks/useLocation";
+import { ListingFormValues } from "../types/Listing";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { BACKEND_URL } from "@env";
 
 const ListingEditScreen = () => {
   const location = useLocation();
+  const [categories, setCategories] = useState([]);
   const initialValues = {
     title: "",
-    price: "",
-    category: null,
+    price: 0,
+    categoryId: null,
     description: "",
     images: [],
   };
@@ -31,12 +36,43 @@ const ListingEditScreen = () => {
     images: yup.array().min(1, "Please add at least one image"),
   });
 
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(`${BACKEND_URL}/categories`);
+        if (response.status === 200) {
+          setCategories(response.data);
+        }
+      } catch (error) {
+        console.log("Error fetching categories: ", error);
+        return [];
+      }
+    };
+    fetchCategories();
+    console.log("categories fetched: ", categories);
+  }, []);
+
+  const postNewListingtoDb = async (values: ListingFormValues) => {
+    try {
+      const response = await axios.post(`${BACKEND_URL}/listings`, {
+        title: values.title,
+        description: values.description,
+        price: values.price,
+        category: values.category,
+      });
+      console.log("Listing posted: ", response.data);
+    } catch (error) {
+      console.log("Error posting listing: ", error);
+    }
+  };
   return (
     <Screen>
       <AppForm
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values) => console.log(values, "location:", location)}
+        onSubmit={(values) => {
+          postNewListingtoDb(values);
+        }}
       >
         <View style={styles.container}>
           <FormImagePicker fieldName="images" />
