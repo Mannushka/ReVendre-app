@@ -12,12 +12,12 @@ export const CategoryPickerItem: React.FC<PickerItemProps> = ({
     <TouchableOpacity onPress={onPress} style={styles.container}>
       <View style={[styles.iconContainer, { backgroundColor: item.color }]}>
         <MaterialCommunityIcons
-          name={item.icon}
+          name={item.iconName}
           size={60}
           color={Colors.WHITE}
         />
       </View>
-      <Text style={styles.text}>{item.label} </Text>
+      <Text style={styles.text}>{item.title} </Text>
     </TouchableOpacity>
   );
 };
