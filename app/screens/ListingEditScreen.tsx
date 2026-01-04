@@ -16,14 +16,14 @@ import { ListingFormValues } from "../types/Listing";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { BACKEND_URL } from "@env";
-
+import { useAuth } from "@clerk/clerk-expo";
 const ListingEditScreen = () => {
   const location = useLocation();
   const [categories, setCategories] = useState([]);
   const initialValues = {
     title: "",
     price: 0,
-    categoryId: null,
+    category: {},
     description: "",
     images: [],
   };
@@ -35,6 +35,8 @@ const ListingEditScreen = () => {
     description: yup.string().label("Description"),
     images: yup.array().min(1, "Please add at least one image"),
   });
+
+  const { getToken } = useAuth();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -49,17 +51,27 @@ const ListingEditScreen = () => {
       }
     };
     fetchCategories();
-    console.log("categories fetched: ", categories);
+    // console.log("categories fetched: ", categories);
   }, []);
 
   const postNewListingtoDb = async (values: ListingFormValues) => {
+    const token = await getToken();
     try {
-      const response = await axios.post(`${BACKEND_URL}/listings`, {
-        title: values.title,
-        description: values.description,
-        price: values.price,
-        category: values.category,
-      });
+      const response = await axios.post(
+        `${BACKEND_URL}/listings`,
+        {
+          title: values.title,
+          price: values.price,
+          description: values.description,
+          // images: values.images,
+          // category: values.category,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       console.log("Listing posted: ", response.data);
     } catch (error) {
       console.log("Error posting listing: ", error);
@@ -71,7 +83,10 @@ const ListingEditScreen = () => {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={(values) => {
-          postNewListingtoDb(values);
+          const payload = { ...values, price: Number(values.price) };
+          console.log("payload:", payload);
+          console.log("price is", typeof payload.price);
+          postNewListingtoDb(payload);
         }}
       >
         <View style={styles.container}>
