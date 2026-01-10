@@ -10,7 +10,7 @@ export type Listing = {
 export type ListingFormValues = {
   title: string;
   price: number;
-  category: Category["id"];
+  category: Category;
   description: string;
-  images: string[];
+  images?: string[];
 };
