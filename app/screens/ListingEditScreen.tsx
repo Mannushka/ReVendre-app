@@ -8,22 +8,23 @@ import { AppFormPicker as Picker } from "../components/forms/AppFormPicker";
 import { View, StyleSheet } from "react-native";
 import * as yup from "yup";
 import Colors from "../utils/Colors";
-// import categories from "../data/Categories";
+import { Category } from "../types/Category";
 import { CategoryPickerItem } from "../components/CategoryPickerItem";
 import { FormImagePicker } from "../components/forms/FormImagePicker";
 import { useLocation } from "../hooks/useLocation";
 import { ListingFormValues } from "../types/Listing";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { BACKEND_URL } from "@env";
+import { BACKEND_URL } from "../../api";
 import { useAuth } from "@clerk/clerk-expo";
+
 const ListingEditScreen = () => {
   const location = useLocation();
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const initialValues = {
     title: "",
     price: 0,
-    category: {},
+    category: {} as Category,
     description: "",
     images: [],
   };
@@ -64,7 +65,7 @@ const ListingEditScreen = () => {
           price: values.price,
           description: values.description,
           // images: values.images,
-          // category: values.category,
+          categoryId: values.category.id,
         },
         {
           headers: {
@@ -74,7 +75,7 @@ const ListingEditScreen = () => {
       );
       console.log("Listing posted: ", response.data);
     } catch (error) {
-      console.log("Error posting listing: ", error);
+      console.log("Error posting listing: ", error.response.data);
     }
   };
   return (
