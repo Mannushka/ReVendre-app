@@ -5,6 +5,8 @@ import { IconName } from "../types/IconName";
 import { AutoCapitalize } from "../types/AutoCapitalize";
 import { Keyboard } from "../types/Keyboard";
 import { TextContent } from "../types/TextContent";
+import { useFormikContext } from "formik";
+import { ListingFormValues } from "../types/Listing";
 
 interface AppTextInputProps {
   icon?: IconName;
@@ -30,6 +32,8 @@ export const AppTextInput: React.FC<AppTextInputProps> = ({
   onBlur,
 }) => {
   const width = inputFieldWidth ? inputFieldWidth : "100%";
+  const { values } = useFormikContext<ListingFormValues>();
+  // console.log("Current form values:", values);
   return (
     <View style={[styles.container, { width: width }]}>
       {icon && (
@@ -43,6 +47,7 @@ export const AppTextInput: React.FC<AppTextInputProps> = ({
         autoCorrect={autoCorrect && autoCorrect}
         keyboardType={keyboardType && keyboardType}
         textContentType={textContentType && textContentType}
+        value={values[placeholder as keyof typeof values] as string}
         onChangeText={onChangeText}
         onBlur={onBlur}
       />
