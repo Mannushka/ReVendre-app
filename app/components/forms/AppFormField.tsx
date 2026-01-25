@@ -28,6 +28,7 @@ export const AppFormField: React.FC<AppFormFieldProps> = ({
   inputFieldWidth,
 }) => {
   const { setFieldTouched, handleChange, touched, errors } = useFormikContext();
+
   return (
     <View style={styles.container}>
       <AppTextInput
@@ -39,11 +40,11 @@ export const AppFormField: React.FC<AppFormFieldProps> = ({
         textContentType={textContentType}
         inputFieldWidth={inputFieldWidth}
         onBlur={() => {
-          setFieldTouched(fieldName),
+          (setFieldTouched(fieldName),
             console.log(
               "field touched",
-              touched[fieldName as keyof FormikTouched<unknown>]
-            );
+              touched[fieldName as keyof FormikTouched<unknown>],
+            ));
         }}
         onChangeText={handleChange(fieldName)}
       />
