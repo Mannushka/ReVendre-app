@@ -15,8 +15,8 @@ export const ImageInputList: React.FC<ImageInputListProps> = ({
   removeImage,
 }) => {
   const scrollView = useRef<ScrollView>(null);
-
-  const images = imageUris.map((imageUri, index) => (
+  // console.log("image uris in input list", imageUris);
+  const images = imageUris?.map((imageUri, index) => (
     <View key={index} style={styles.image}>
       <ImageItem
         imageUri={imageUri}
