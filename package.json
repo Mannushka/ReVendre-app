@@ -13,10 +13,12 @@
     "@clerk/clerk-expo": "^2.14.1",
     "@expo/metro-runtime": "~4.0.0",
     "@expo/vector-icons": "^14.0.2",
+    "@react-native-async-storage/async-storage": "1.23.1",
     "@react-navigation/bottom-tabs": "^7.3.14",
     "@react-navigation/native": "^7.1.10",
     "@react-navigation/native-stack": "^7.3.14",
     "@react-navigation/stack": "^7.3.3",
+    "@supabase/supabase-js": "^2.90.1",
     "axios": "^1.11.0",
     "expo": "~52.0.25",
     "expo-constants": "^17.0.5",
@@ -43,7 +45,8 @@
     "@babel/core": "^7.25.2",
     "@types/react": "~18.3.12",
     "@types/react-native": "^0.72.8",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "@react-native-community/cli": "latest"
   },
   "private": true
 }
