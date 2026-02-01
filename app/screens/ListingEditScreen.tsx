@@ -24,6 +24,7 @@ const ListingEditScreen = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [uploading, setUploading] = useState(false);
   const [imagesUploaded, setImagesUploaded] = useState<string[]>([]);
+  const [uploadedImagePaths, setUploadedImagePaths] = useState<string[]>([]);
   const initialValues = {
     title: "",
     price: 0,
@@ -118,6 +119,8 @@ const ListingEditScreen = () => {
 
     setImagesUploaded(success.map((s) => s.url));
 
+    setUploadedImagePaths(success.map((s) => s.path));
+
     const failed = results.filter((r) => !r.ok);
     console.log("Images uploaded: ", success);
     console.log("Images failed: ", failed);
@@ -155,6 +158,7 @@ const ListingEditScreen = () => {
 
   const postNewListingtoDb = async (values: ListingFormValues) => {
     const token = await getToken();
+    console.log("Auth token:", token);
 
     if (!token) {
       console.log("No auth token found");
@@ -170,7 +174,7 @@ const ListingEditScreen = () => {
         return;
       }
     }
-
+    console.log("uploded images", imagesUploaded);
     try {
       const response = await axios.post(
         `${BACKEND_URL}/listings`,
@@ -178,7 +182,7 @@ const ListingEditScreen = () => {
           title: values.title,
           price: values.price,
           description: values.description,
-          // imageUrls: imagesUploaded,
+          imgUrls: imagesUploaded,
           categoryId: values.category.id,
         },
         {
@@ -190,6 +194,26 @@ const ListingEditScreen = () => {
       console.log("Listing posted: ", response.data);
     } catch (error) {
       console.log("Error posting listing: ", error.response.data);
+      //delete uploaded images from supabase - not working correctly for now
+      if (imagesUploaded.length > 0) {
+        console.log("images have been uploaded", imagesUploaded.length);
+        try {
+          console.log(uploadedImagePaths);
+          const { error: deleteError } = await supabase.storage
+            .from("listing-images")
+            .remove(uploadedImagePaths);
+          if (deleteError) {
+            console.log(
+              "Error deleting images after failed listing post: ",
+              deleteError,
+            );
+          } else {
+            console.log("Uploaded images deleted after failed listing post.");
+          }
+        } catch (err) {
+          console.log("Error during cleanup of uploaded images: ", err);
+        }
+      }
     }
   };
   return (
