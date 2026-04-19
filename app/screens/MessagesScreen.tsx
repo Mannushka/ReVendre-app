@@ -73,7 +73,7 @@ const MessagesScreen: React.FC<MessagesScreenProps> = ({ navigation }) => {
     image: string;
   }): void => {
     setMessages((prevMessages) =>
-      prevMessages.filter((m) => m.id !== message.id)
+      prevMessages.filter((m) => m.id !== message.id),
     );
   };
 
